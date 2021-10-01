@@ -18,6 +18,11 @@ antigen theme spaceship-prompt/spaceship-prompt
 # Tell Antigen that you're done.
 antigen apply 
 
+#Spaceship config
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_GIT_BRANCH_COLOR=blue
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_NODE_SHOW=false
 alias in="paru -S"
 #alias dup="paru -Syu"
 alias dup="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
