@@ -13,12 +13,14 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-antigen theme minimal 
+# antigen theme minimal 
+antigen theme spaceship-prompt/spaceship-prompt
 # Tell Antigen that you're done.
 antigen apply 
 
 alias in="paru -S"
-alias dup="paru -Syu"
+#alias dup="paru -Syu"
+alias dup="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
 alias rp="paru -R"
 alias fuck='sudo $(fc -ln -1)'
 alias gcl="git clone"
@@ -34,6 +36,7 @@ alias ncmpcpp="ncmpcpp-ueberzug"
 alias xref="xrdb ~/.Xresources"
 alias listpkg="comm -23 <(paru -Qqett | sort) <(paru -Qqg base -g base-devel | sort | uniq)"
 alias ls="exa -la"
+alias lock="betterlockscreen -l"
 # Copy file with a progress bar
 cpp()
 {
