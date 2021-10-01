@@ -136,8 +136,12 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 2,
         "margin": 2,
-        "border_focus": "fff430",
-        "border_normal": "9c59d1"
+        #enby colors
+        #"border_focus": "fff430",
+        #"border_normal": "9c59d1"
+        #nord colors
+        "border_focus": "88C0D0",
+        "border_normal": "5E81AC"
         }
 
 layouts = [
@@ -156,12 +160,19 @@ layouts = [
         layout.RatioTile(**layout_theme),
         layout.TreeTab(
             font = "San Francisco Display",
-            fontsize = 10,
-            bg_color = "1c1f24",
-            active_bg = "c678dd",
-            active_fg = "000000",
-            inactive_bg = "a9a1e1",
-            inactive_fg = "1c1f24",
+            fontsize = 12,
+            #Enby Colors
+            #bg_color = "1c1f24",
+            #active_bg = "c678dd",
+            #active_fg = "000000",
+            #inactive_bg = "a9a1e1",
+            #inactive_fg = "1c1f24",
+            #Nord Colors
+            bg_color = "2E3440",
+            active_bg = "4C566A",
+            active_fg = "ECEFF4",
+            inactive_bg = "3B4252",
+            inactive_fg = "E5E9F0",
             padding_left = 0,
             padding_x = 0,
             padding_y = 5,
@@ -169,20 +180,29 @@ layouts = [
             section_bottom = 20,
             level_shift = 8,
             vspace = 3,
-            panel_width = 200
+            panel_width = 225
             ),
         layout.Floating(**layout_theme)
         ]
+# enby colors
+#colors = [["#121212", "#121212"], # panel background
+#        ["#3d3f4b", "#434758"], # background for current screen tab
+#        ["#272822", "#272822"], # font color for group names
+#        ["#fff430", "#fff430"], # border line color for current tab
+#        ["#fff430", "#fff430"], # border line color for 'other tabs' and color for 'odd widgets'
+#        ["#9c59d1", "#9c59d1"], # color for the 'even widgets'
+#        ["#bbbbbb", "#bbbbbb"], # window name
+#        ["#9c59d1", "#9c59d1"]] # backbround for inactive screens
 
-colors = [["#121212", "#121212"], # panel background
+
+colors = [["#2E3440", "#2E3440"], # panel background
         ["#3d3f4b", "#434758"], # background for current screen tab
-        ["#272822", "#272822"], # font color for group names
-        ["#fff430", "#fff430"], # border line color for current tab
-        ["#fff430", "#fff430"], # border line color for 'other tabs' and color for 'odd widgets'
-        ["#9c59d1", "#9c59d1"], # color for the 'even widgets'
+        ["#D8DEE9", "#D8DEE9"], # font color for group names
+        ["#88C0D0", "#88C0D0"], # border line color for current tab
+        ["#4C566A", "#4C566A"], # border line color for 'other tabs' and color for 'odd widgets'
+        ["#3B4252", "#3B4252"], # color for the 'even widgets'
         ["#bbbbbb", "#bbbbbb"], # window name
-        ["#9c59d1", "#9c59d1"]] # backbround for inactive screens
-
+        ["#5E81AC", "#5E81AC"]] # backbround for inactive screens
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 ##### DEFAULT WIDGET SETTINGS #####
@@ -287,7 +307,7 @@ def init_widgets_list():
                       distro = "Arch_checkupdates",
                       display_format = "{updates} Updates",
                       foreground = colors[2],
-                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e paru -Syu')},
+                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Sy && sudo powerpill -Su && paru -Su')},
                       background = colors[4]
                       ),
               widget.TextBox(
