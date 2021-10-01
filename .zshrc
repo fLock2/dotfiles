@@ -1,7 +1,6 @@
 source /home/flock/antigen.zsh
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
-
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle heroku
@@ -19,7 +18,6 @@ antigen theme spaceship-prompt/spaceship-prompt
 antigen apply 
 
 #Spaceship config
-SPACESHIP_TIME_SHOW=true
 SPACESHIP_GIT_BRANCH_COLOR=blue
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false

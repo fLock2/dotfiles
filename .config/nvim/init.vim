@@ -38,7 +38,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
     Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
     Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
-
+"deoplete
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 filetype plugin indent on    " required
@@ -183,6 +184,10 @@ let g:instant_markdown_browser = "surf"      " Uses surf for preview
 map <Leader>md :InstantMarkdownPreview<CR>   " Previews .md file
 map <Leader>ms :InstantMarkdownStop<CR>      " Kills the preview
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Deoplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:deoplete#enable_at_startup = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Open terminal inside Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

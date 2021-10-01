@@ -45,8 +45,8 @@ keys = [
             desc='Shutdown Qtile'
             ),
         Key([mod, "shift"], "s",
-            lazy.spawn("urxvt -e betterlockscreen -l --off 5"),
-            desc='Lock Qtile'
+            lazy.spawn("urxvt -e systemctl suspend -i"),
+            desc='Suspend Qtile'
             ),
         ### Treetab controls
         Key([mod, "shift"], "h",
@@ -307,7 +307,7 @@ def init_widgets_list():
                       distro = "Arch_checkupdates",
                       display_format = "{updates} Updates",
                       foreground = colors[2],
-                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Sy && sudo powerpill -Su && paru -Su')},
+                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e paru -Syu')},
                       background = colors[4]
                       ),
               widget.TextBox(
