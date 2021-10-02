@@ -21,6 +21,7 @@ antigen apply
 SPACESHIP_GIT_BRANCH_COLOR=blue
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
+SPACESHIP_GIT_STATUS_SHOW=false
 alias in="paru -S"
 #alias dup="paru -Syu"
 alias dup="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
