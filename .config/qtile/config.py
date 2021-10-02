@@ -276,13 +276,13 @@ def init_widgets_list():
                     foreground = colors[0],
                     background = colors[0]
                     ),
-            widget.Net(
-                    interface = "wlp4s0",
-                    format = '{down} ↓↑ {up}',
-                    foreground = colors[2],
-                    background = colors[4],
-                    padding = 5
-                    ),
+            #widget.Net(
+            #        interface = "wlp4s0",
+            #        format = '{down} ↓↑ {up}',
+            #        foreground = colors[2],
+            #        background = colors[0],
+            #        padding = 5
+            #        ),
             widget.Battery(
                     padding = 2,
                     foreground = colors[2],
@@ -299,7 +299,7 @@ def init_widgets_list():
                       text = " ⟳",
                       padding = 2,
                       foreground = colors[2],
-                      background = colors[4],
+                      background = colors[0],
                       fontsize = 14
                       ),
               widget.CheckUpdates(
@@ -308,7 +308,7 @@ def init_widgets_list():
                       display_format = "{updates} Updates",
                       foreground = colors[2],
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e paru -Syu')},
-                      background = colors[4]
+                      background = colors[0]
                       ),
               widget.TextBox(
                       text = " 🖬",
@@ -323,32 +323,32 @@ def init_widgets_list():
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e gotop')},
                       padding = 5
                       ),
-              widget.TextBox(
-                      text = " Vol:",
-                      foreground = colors[2],
-                      background = colors[4],
-                      padding = 0
-                      ),
-              widget.Volume(
-                      foreground = colors[2],
-                      background = colors[4],
-                      padding = 5
-                      ),
               widget.CurrentLayoutIcon(
                       custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                       foreground = colors[0],
-                      background = colors[5],
+                      background = colors[0],
                       padding = 0,
                       scale = 0.7
                       ),
               widget.CurrentLayout(
+                      foreground = colors[2],
+                      background = colors[0],
+                      padding = 5
+                      ),
+              widget.TextBox(
+                      text = " Vol:",
+                      foreground = colors[2],
+                      background = colors[5],
+                      padding = 0
+                      ),
+              widget.Volume(
                       foreground = colors[2],
                       background = colors[5],
                       padding = 5
                       ),
               widget.Clock(
                       foreground = colors[2],
-                      background = colors[4],
+                      background = colors[0],
                       format = "%A, %B %d - %H:%M "
                       ),
               ]
