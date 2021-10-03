@@ -207,7 +207,10 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
-        font="SFMono Nerd Font Mono",
+        #font="SFMono Nerd Font Mono",
+        font="Cascadia Mono",
+        #font="Iosevka Fixed",
+        #font="Fira Code",
         fontsize = 12,
         padding = 2,
         background=colors[2]
@@ -229,7 +232,7 @@ def init_widgets_list():
                 background = colors[0]
                 ),
             widget.GroupBox(
-                font = "SF Pro Display Bold",
+                font = "San Francisco Display Bold",
                 fontsize = 9,
                 margin_y = 3,
                 margin_x = 0,
@@ -250,7 +253,7 @@ def init_widgets_list():
                 ),
             widget.Prompt(
                 prompt = prompt,
-                font = "SFMono Nerd Font Mono",
+                font = "Cascadia Mono",
                 padding = 10,
                 foreground = colors[3],
                 background = colors[1]
