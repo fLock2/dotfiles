@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-solarized-dark)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -55,3 +55,7 @@
 ;; they are implemented.
 (use-package vmd-mode
   :defer)
+(dolist (hook '(text-mode-hook))
+         (add-hook hook (lambda () (flyspell-mode 1))))
+    (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode -1))))

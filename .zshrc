@@ -41,6 +41,7 @@ alias xref="xrdb ~/.Xresources"
 alias listpkg="comm -23 <(paru -Qqett | sort) <(paru -Qqg base -g base-devel | sort | uniq)"
 alias ls="exa -la"
 alias lock="betterlockscreen -l"
+alias doom="~/.emacs.d/bin/doom"
 # Copy file with a progress bar
 cpp()
 {

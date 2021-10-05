@@ -16,13 +16,9 @@ myBrowser = "vivaldi-stable" # My terminal of choice
 
 keys = [
         ### The essentials
-        Key([mod], "Return",
+        Key([mod, "shift"], "Return",
             lazy.spawn(myTerm),
             desc='Launches My Terminal'
-            ),
-        Key([mod, "shift"], "Return",
-            lazy.spawn("albert"),
-            desc='Run Launcher'
             ),
         Key([mod], "b",
             lazy.spawn(myBrowser),
@@ -139,9 +135,12 @@ layout_theme = {"border_width": 2,
         #enby colors
         #"border_focus": "fff430",
         #"border_normal": "9c59d1"
-        #nord colors
-        "border_focus": "88C0D0",
-        "border_normal": "5E81AC"
+        #Nord colors
+        #"border_focus": "88C0D0",
+        #"border_normal": "5E81AC"
+        #Solarized colors
+        "border_focus": "FDF6E3",
+        "border_normal": "93A1A1"
         }
 
 layouts = [
@@ -159,8 +158,8 @@ layouts = [
         layout.Stack(num_stacks=2),
         layout.RatioTile(**layout_theme),
         layout.TreeTab(
-            font = "San Francisco Display",
-            fontsize = 12,
+            font = "Iosevka",
+            fontsize = 14,
             #Enby Colors
             #bg_color = "1c1f24",
             #active_bg = "c678dd",
@@ -168,11 +167,17 @@ layouts = [
             #inactive_bg = "a9a1e1",
             #inactive_fg = "1c1f24",
             #Nord Colors
-            bg_color = "2E3440",
-            active_bg = "4C566A",
-            active_fg = "ECEFF4",
-            inactive_bg = "3B4252",
-            inactive_fg = "E5E9F0",
+            #bg_color = "2E3440",
+            #active_bg = "4C566A",
+            #active_fg = "ECEFF4",
+            #inactive_bg = "3B4252",
+            #inactive_fg = "E5E9F0",
+            #Solarized Colors
+            bg_color = "002B36",
+            active_bg = "073642",
+            active_fg = "93A1A1",
+            inactive_bg = "002B36",
+            inactive_fg = "839496",
             padding_left = 0,
             padding_x = 0,
             padding_y = 5,
@@ -194,24 +199,35 @@ layouts = [
 #        ["#bbbbbb", "#bbbbbb"], # window name
 #        ["#9c59d1", "#9c59d1"]] # backbround for inactive screens
 
+# Nord Colors
+#colors = [["#2E3440", "#2E3440"], # panel background
+#        ["#3d3f4b", "#434758"], # background for current screen tab
+#        ["#D8DEE9", "#D8DEE9"], # font color for group names
+#        ["#88C0D0", "#88C0D0"], # border line color for current tab
+#        ["#4C566A", "#4C566A"], # border line color for 'other tabs' and color for 'odd widgets'
+#        ["#3B4252", "#3B4252"], # color for the 'even widgets'
+#        ["#bbbbbb", "#bbbbbb"], # window name
+#        ["#5E81AC", "#5E81AC"]] # backbround for inactive screens
 
-colors = [["#2E3440", "#2E3440"], # panel background
-        ["#3d3f4b", "#434758"], # background for current screen tab
-        ["#D8DEE9", "#D8DEE9"], # font color for group names
-        ["#88C0D0", "#88C0D0"], # border line color for current tab
-        ["#4C566A", "#4C566A"], # border line color for 'other tabs' and color for 'odd widgets'
-        ["#3B4252", "#3B4252"], # color for the 'even widgets'
-        ["#bbbbbb", "#bbbbbb"], # window name
-        ["#5E81AC", "#5E81AC"]] # backbround for inactive screens
+# Solarized Colors
+colors = [["#073642", "#073642"], # panel background
+        ["#073642", "#073642"], # background for current screen tab
+        ["#93A1A1", "#93A1A1"], # font color for group names
+        ["#EEE8D5", "#EEE8D5"], # border line color for current tab
+        ["#073642", "#073642"], # border line color for 'other tabs' and color for 'odd widgets'
+        ["#073642", "#073642"], # color for the 'even widgets'
+        ["#93A1A1", "#93A1A1"], # window name
+        ["#93A1A1", "#93A1A1"]] # backbround for inactive screens
+
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
         #font="SFMono Nerd Font Mono",
-        font="Cascadia Mono",
-        #font="Iosevka Fixed",
+        #font="Cascadia Mono",
+        font="Iosevka",
         #font="Fira Code",
-        fontsize = 12,
+        fontsize = 14,
         padding = 2,
         background=colors[2]
         )
@@ -232,8 +248,8 @@ def init_widgets_list():
                 background = colors[0]
                 ),
             widget.GroupBox(
-                font = "San Francisco Display Bold",
-                fontsize = 9,
+                font = "Iosevka SemiBold",
+                fontsize = 14,
                 margin_y = 3,
                 margin_x = 0,
                 padding_y = 5,

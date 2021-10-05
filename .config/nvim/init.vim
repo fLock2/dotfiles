@@ -31,6 +31,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
     Plug 'vim-python/python-syntax'                    " Python highlighting
     Plug 'ap/vim-css-color'                            " Color previews for CSS
+"{{ Syntax Highlighting and Colors }}
     Plug 'phanviet/vim-monokai-pro'                    " Monokai colorscheme
     Plug 'arcticicestudio/nord-vim'                    " nord colorscheme
     Plug 'altercation/vim-colors-solarized'            " Solarized colorscheme
