@@ -26,6 +26,7 @@ alias in="paru -S"
 #alias dup="paru -Syu"
 alias dup="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
 alias rp="paru -R"
+alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
 alias fuck='sudo $(fc -ln -1)'
 alias gcl="git clone"
 alias gcm="git commit -m"

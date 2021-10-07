@@ -11,7 +11,7 @@
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
-   '("f6665ce2f7f56c5ed5d91ed5e7f6acb66ce44d0ef4acfaa3a42c7cfe9e9a9013" "cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "1704976a1797342a1b4ea7a75bdbb3be1569f4619134341bd5a4c1cfb16abad4" "d268b67e0935b9ebc427cad88ded41e875abfcc27abd409726a92e55459e0d01" default))
+   '("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "f6665ce2f7f56c5ed5d91ed5e7f6acb66ce44d0ef4acfaa3a42c7cfe9e9a9013" "cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "1704976a1797342a1b4ea7a75bdbb3be1569f4619134341bd5a4c1cfb16abad4" "d268b67e0935b9ebc427cad88ded41e875abfcc27abd409726a92e55459e0d01" default))
  '(exwm-floating-border-color "#011417")
  '(fci-rule-color "#405A61")
  '(highlight-changes-colors '("#d33682" "#6c71c4"))
@@ -36,7 +36,7 @@
    '("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4"))
  '(objed-cursor-color "#dc322f")
  '(package-selected-packages
-   '(solarized-theme helm-ispell ac-ispell org-preview-html markdown-mode vmd-mode nord-theme ##))
+   '(color-theme-sanityinc-solarized solarized-theme helm-ispell ac-ispell org-preview-html markdown-mode vmd-mode nord-theme ##))
  '(pdf-view-midnight-colors (cons "#839496" "#002b36"))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# fLock's qtile config that I kinda sorta stole from Derek Taylor sorry
+# coding: utf-8 -*-
 import os
 import re
 import socket
@@ -10,7 +11,7 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
-mod = "mod1"              # Sets mod key to SUPER/WINDOWS
+mod = "mod1"              # Sets mod key to Alt like a human who has used a laptop before
 myTerm = "kitty"      # My terminal of choice
 myBrowser = "vivaldi-stable" # My terminal of choice
 
@@ -25,8 +26,12 @@ keys = [
             desc='Vivaldi'
             ),
         Key([mod], "Tab",
+            lazy.screen.toggle_group(),
+            desc='Move to last used group'
+            ),
+        Key([mod, "shift"], "Tab",
             lazy.next_layout(),
-            desc='Toggle through layouts'
+            desc='Switch to next layout'
             ),
         Key([mod, "shift"], "q",
             lazy.window.kill(),
