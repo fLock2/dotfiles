@@ -404,11 +404,11 @@ myKeys =
         , ("M-S-j", windows W.swapDown)   -- Swap focused window with next window
         , ("M-S-k", windows W.swapUp)     -- Swap focused window with prev window
         , ("M-<Backspace>", promote)      -- Moves focused window to master, others maintain order
-        , ("M-S-<Tab>", rotSlavesDown)    -- Rotate all windows except master and keep focus in place
-        , ("M-C-<Tab>", rotAllDown)       -- Rotate all the windows in the current stack
+        , ("M-S-d", rotSlavesDown)    -- Rotate all windows except master and keep focus in place
+        , ("M-S-f", rotAllDown)       -- Rotate all the windows in the current stack
 
     -- KB_GROUP Layouts
-        , ("M-<Tab>", nextMatch History (return True))           -- Switch to next layout
+        , ("M-S-<Tab>", sendMessage NextLayout)           -- Switch to next layout
         , ("M-<Space>", sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
 
     -- KB_GROUP Increase/decrease windows in the master pane or the stack
