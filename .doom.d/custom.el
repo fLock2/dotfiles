@@ -36,7 +36,7 @@
    '("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4"))
  '(objed-cursor-color "#dc322f")
  '(package-selected-packages
-   '(color-theme-sanityinc-solarized solarized-theme helm-ispell ac-ispell org-preview-html markdown-mode vmd-mode nord-theme ##))
+   '(quickrun color-theme-sanityinc-solarized solarized-theme helm-ispell ac-ispell org-preview-html markdown-mode vmd-mode nord-theme ##))
  '(pdf-view-midnight-colors (cons "#839496" "#002b36"))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -80,3 +80,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(global-set-key (kbd "C-c C-u") 'quickrun-shell)
