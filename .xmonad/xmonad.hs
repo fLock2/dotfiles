@@ -61,6 +61,7 @@ import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
 import XMonad.Actions.GroupNavigation
    -- Utilities
 import XMonad.Util.Dmenu
+import XMonad.Util.Cursor
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
@@ -100,6 +101,7 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "lxsession &"
+    spawnOnce "xsetroot -cursor_name Left_ptr &"
     spawnOnce "picom &"
     spawnOnce "nm-applet &"
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x073642  --height 22 &"
@@ -145,7 +147,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
                    }
 
 myAppGrid = [ ("Audacity", "audacity")
-                 , ("Deadbeef", "deadbeef")
+                 , ("Cantata", "cantata")
                  , ("Emacs", "emacsclient -c -a emacs")
                  , ("Firefox", "firefox")
                  , ("Geany", "geany")
@@ -155,7 +157,7 @@ myAppGrid = [ ("Audacity", "audacity")
                  , ("LibreOffice Impress", "loimpress")
                  , ("LibreOffice Writer", "lowriter")
                  , ("OBS", "obs")
-                 , ("PCManFM", "pcmanfm")
+                 , ("Nautilus", "nautilus")
                  ]
 
 myScratchPads :: [NamedScratchpad]
@@ -331,15 +333,14 @@ myManageHook = composeAll
      , title =? "urxvt"             --> doCenterFloat
      , title =? "Oracle VM VirtualBox Manager"  --> doFloat
      , title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 0 )
-     , className =? "Brave-browser"   --> doShift ( myWorkspaces !! 0 )
+     , className =? "vivaldi-stable"   --> doShift ( myWorkspaces !! 0 )
      , className =? "Emacs"           --> doShift ( myWorkspaces !! 1 )
-     , className =? "mpv"             --> doShift ( myWorkspaces !! 7 )
-     , className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
+     , className =? "pavucontrol"             --> doShift ( myWorkspaces !! 7 )
+     , className =? "cantata"            --> doShift ( myWorkspaces !! 8 )
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
-     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+     , (className =? "firefox-developer-edition" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , isFullscreen -->  doFullFloat
      ] <+> namedScratchpadManageHook myScratchPads
-
 -- START_KEYS
 myKeys :: [(String, X ())]
 myKeys =
