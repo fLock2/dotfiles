@@ -71,7 +71,7 @@ myFont :: String
 myFont = "xft:Iosevka:regular:size=9:antialias=true:hinting=true"
 
 myModMask :: KeyMask
-myModMask = mod1Mask        -- Sets modkey to super/windows key
+myModMask = mod4Mask        -- Sets modkey to super/windows key
 
 myTerminal :: String
 myTerminal = "kitty"    -- Sets default terminal
