@@ -1,9 +1,5 @@
 -- Xmobar (http://projects.haskell.org/xmobar/)
--- This is the default xmobar configuration for DTOS.
--- This config is packaged in the DTOS repo as dtos-xmobar
--- Dependencies: otf-font-awesome ttf-mononoki ttf-ubuntu-font-family trayer
--- Also depends on scripts from dtos-local-bin from the dtos-core-repo.
-
+ -- This is a config I solarized and kinda sorta stole from Derek Taylor. Sorry
 Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Iosevka Term:pixelsize=13:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
@@ -36,6 +32,8 @@ Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=tr
                         -- Echos a "battery" icon in front of the battery status. 
                     , Run Com "echo" ["<fn=2>\xf240</fn>"] "baticon" 3600
                         -- Echos a "penguin" icon in front of the kernel output.
+                        -- Cpu usage in percent
+                    , Run Cpu ["-t", "<fn=2>\xf108</fn>  cpu: (<total>%)","-H","50","--high","red"] 20
                     , Run Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
                         -- Get kernel version (script found in .local/bin)
                     , Run Com ".local/bin/kernel" [] "kernel" 36000
@@ -54,5 +52,5 @@ Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=tr
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=haskell_20.xpm/>   <fc=#859496>|</fc> %UnsafeStdinReader% }{ <box type=Bottom width=2 mb=2 color=#859900><fc=#859900>%baticon%  <action=`kitty -e battop`>%battery%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#B58900><fc=#B58900>%penguin%  <action=`kitty -e gotop`>%kernel%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#CB4B16><fc=#CB4B16><action=`kitty -e gotop`>%memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#D33682><fc=#D33682>%bell%  <action=`kitty -e paru -Syu`>%pacupdate%</action></fc></box> <box type=Bottom width=2 mb=2 color=#268BD2><fc=#268BD2>%date%</fc></box> %trayerpad% "
+       , template = " <icon=haskell_20.xpm/>   <fc=#859496>|</fc> %UnsafeStdinReader% }{ <box type=Bottom width=2 mb=2 color=#859900><fc=#859900>%baticon%  <action=`kitty -e battop`>%battery%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#B58900><fc=#B58900><action=`kitty -e gotop`>%cpu%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#CB4B16><fc=#CB4B16><action=`kitty -e gotop`>%memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#D33682><fc=#D33682>%bell%  <action=`kitty -e paru -Syu`>%pacupdate%</action></fc></box> <box type=Bottom width=2 mb=2 color=#268BD2><fc=#268BD2>%date%</fc></box> %trayerpad% "
        }
