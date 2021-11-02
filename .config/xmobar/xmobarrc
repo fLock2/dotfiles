@@ -1,12 +1,12 @@
 -- Xmobar (http://projects.haskell.org/xmobar/)
- -- This is a config I solarized and kinda sorta stole from Derek Taylor. Sorry
+ -- This is a config I nordized and kinda sorta stole from Derek Taylor. Sorry
 Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Iosevka Term:pixelsize=13:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
                            ]
-       , bgColor      = "#073642"
-       , fgColor      = "#93A1A1"
+       , bgColor      = "#2E3440"
+       , fgColor      = "#EFE9F0"
        -- Position TopSize and BottomSize take 3 arguments:
        --   an alignment parameter (L/R/C) for Left, Right or Center.
        --   an integer for the percentage width, so 100 would be 100%.
@@ -15,7 +15,7 @@ Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=tr
        , position       = TopSize L 100 22
        , lowerOnStart = True
        , hideOnStart  = False
-       , allDesktops  = True
+  -- = True
        , persistent   = True
        , iconRoot     = ".xmonad/xpm/"  -- default: "."
        , commands = [
@@ -41,8 +41,6 @@ Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=tr
                     , Run Memory ["-t", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"] 10
                         -- Echos a "bell" icon in front of the pacman updates.
                     , Run Com "echo" ["<fn=2>\xf0f3</fn>"] "bell" 3600
-                        -- Check for pacman updates (script found in .local/bin)
-                    , Run Com ".local/bin/pacupdate" [] "pacupdate" 36000
                         -- Time and date
                     , Run Date "<fn=2>\xf017</fn>  %b %d %Y - (%H:%M) " "date" 600
                         -- Script that dynamically adjusts xmobar padding depending on number of trayer icons.
@@ -52,5 +50,5 @@ Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=tr
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=haskell_20.xpm/>   <fc=#859496>|</fc> %UnsafeStdinReader% }{ <box type=Bottom width=2 mb=2 color=#859900><fc=#859900>%baticon%  <action=`kitty -e battop`>%battery%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#B58900><fc=#B58900><action=`kitty -e gotop`>%cpu%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#CB4B16><fc=#CB4B16><action=`kitty -e gotop`>%memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#D33682><fc=#D33682>%bell%  <action=`kitty -e paru -Syu`>%pacupdate%</action></fc></box> <box type=Bottom width=2 mb=2 color=#268BD2><fc=#268BD2>%date%</fc></box> %trayerpad% "
+       , template = " <icon=haskell_20.xpm/>   <fc=#E5E9F0>|</fc> %UnsafeStdinReader% }{ <box type=Bottom width=2 mb=2 color=#A3BE8C><fc=#A3BE8C>%baticon%  <action=`kitty -e battop`>%battery%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#EBCB8B><fc=#EBCB8B><action=`kitty -e gotop`>%cpu%</action> </fc></box> <box type=Bottom width=2 mb=2 color=#D08770><fc=#D08770><action=`kitty -e gotop`>%memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#B48EAD><fc=#B48EAD>%date%</fc></box> %trayerpad% "
        }

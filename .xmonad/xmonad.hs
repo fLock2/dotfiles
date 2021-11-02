@@ -90,10 +90,12 @@ myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
 
 myNormColor :: String
-myNormColor   = "#839496"   -- Border color of normal windows
+-- myNormColor   = "#839496"   -- Border color of normal windows (solarized)
+myNormColor   = "#81A1C1"   -- Border color of normal windows (nord)
 
 myFocusColor :: String
-myFocusColor  = "#93A1A1"   -- Border color of focused windows
+-- myFocusColor  = "#93A1A1"   -- Border color of focused windows (solarized)
+myFocusColor  = "#88C0D0"   -- Border color of focused windows (nord)
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -103,8 +105,9 @@ myStartupHook = do
     spawnOnce "lxsession &"
     spawnOnce "xsetroot -cursor_name Left_ptr &"
     spawnOnce "picom &"
+    spawnOnce "albert &"
     spawnOnce "nm-applet &"
-    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x073642  --height 22 &"
+    spawnOnce "trayer --edge bottom --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x2E3440  --height 22 &"
     spawnOnce "/usr/bin/emacs --daemon &" -- emacs daemon for the emacsclient
     -- uncomment to restore last saved wallpaper
     spawnOnce "xargs xwallpaper --stretch < ~/.xwallpaper"
@@ -370,6 +373,7 @@ myKeys =
         , ("M-S-<Return>", spawn (myTerminal))
         , ("M-b", spawn (myBrowser))
         , ("M-M1-h", spawn (myTerminal ++ " -e htop"))
+        , ("M-d", spawn "rofi -mode drun -show drun")
 
     -- KB_GROUP Kill windows
         , ("M-S-q", kill1)     -- Kill the currently focused client
@@ -516,11 +520,16 @@ main = do
               { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
                               >> hPutStrLn xmproc1 x                          -- xmobar on monitor 2
                               >> hPutStrLn xmproc2 x                          -- xmobar on monitor 3
-              , ppCurrent = xmobarColor "#EEE8D5" "" . wrap "<box type=Bottom width=2 mb=2 color=#EEE8D5>" "</box>"         -- Current workspace
-              , ppVisible = xmobarColor "#93A1A1" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#93A1A1" "" . wrap "<box type=Bottom width=2 mt=2 color=#93A1A1>" "</box>" . clickable -- Hidden workspaces
-              , ppHiddenNoWindows = xmobarColor "#93A1A1" ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor "#93A1A1" "" . shorten 60               -- Title of active window
+              -- , ppCurrent = xmobarColor "#EEE8D5" "" . wrap "<box type=Bottom width=2 mb=2 color=#EEE8D5>" "</box>"         -- Current workspace
+              -- , ppVisible = xmobarColor "#93A1A1" "" . clickable              -- Visible but not current workspace
+              -- , ppHidden = xmobarColor "#93A1A1" "" . wrap "<box type=Bottom width=2 mt=2 color=#93A1A1>" "</box>" . clickable -- Hidden workspaces
+              -- , ppHiddenNoWindows = xmobarColor "#93A1A1" ""  . clickable     -- Hidden workspaces (no windows)
+              -- , ppTitle = xmobarColor "#93A1A1" "" . shorten 60               -- Title of active window
+              , ppCurrent = xmobarColor "#ECEFF4" "" . wrap "<box type=Bottom width=2 mb=2 color=#ECEFF4>" "</box>"         -- Current workspace
+              , ppVisible = xmobarColor "#D8DEE9" "" . clickable              -- Visible but not current workspace
+              , ppHidden = xmobarColor "#D8DEE9" "" . wrap "<box type=Bottom width=2 mt=2 color=#D8DEE9>" "</box>" . clickable -- Hidden workspaces
+              , ppHiddenNoWindows = xmobarColor "#D8DEE9" ""  . clickable     -- Hidden workspaces (no windows)
+              , ppTitle = xmobarColor "#D8DEE9" "" . shorten 60               -- Title of active window
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
               , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
               , ppExtras  = [windowCount]                                     -- # of windows current workspace
