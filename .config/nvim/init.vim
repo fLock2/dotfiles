@@ -24,6 +24,7 @@ call plug#begin('~/.vim/plugged')
 "{{ Productivity }}
     Plug 'vimwiki/vimwiki'                             " VimWiki 
     Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
+    Plug 'github/copilot.vim'                          " github copilot
 "{{ Tim Pope Plugins }}
     Plug 'tpope/vim-surround'                          " Change surrounding marks
 "{{ Syntax Highlighting and Colors }}
@@ -35,6 +36,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'phanviet/vim-monokai-pro'                    " Monokai colorscheme
     Plug 'arcticicestudio/nord-vim'                    " nord colorscheme
     Plug 'altercation/vim-colors-solarized'            " Solarized colorscheme
+    Plug 'morhetz/gruvbox'                             " Gruvbox colorscheme
 "{{ Junegunn Choi Plugins }}
     Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
     Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
@@ -80,7 +82,7 @@ let g:rehash256 = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " The lightline.vim theme
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'gruvbox',
       \ }
 
 " Always show statusline
@@ -114,7 +116,7 @@ let g:NERDTreeWinSize=38
 " => Colors and Theming
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
-colorscheme nord
+colorscheme gruvbox
 "highlight Normal           guifg=#dfdfdf ctermfg=15   guibg=#282c34 ctermbg=none  cterm=none
 "highlight LineNr           guifg=#5b6268 ctermfg=8    guibg=#282c34 ctermbg=none  cterm=none
 "highlight CursorLineNr     guifg=#202328 ctermfg=7    guifg=#5b6268 ctermbg=8     cterm=none
