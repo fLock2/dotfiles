@@ -1,0 +1,29 @@
+startup = [
+ "mkdir ~/.cache/starship",
+ "starship init nu | save ~/.cache/starship/init.nu",
+ "source ~/.cache/starship/init.nu",
+ "alias in = sudo dnf install",
+ "alias up = sudo dnf update && flatpak update",
+ "alias dup = sudo dnf distro-sync && flatpak update",
+ "alias rp = sudo dnf remove",
+ "alias cleancache = sudo dnf clean all",
+ "alias fuck = sudo $(fc -ln -1)",
+ "alias gcl = git clone",
+ "alias gcm = git commit -m",
+ "alias gpl = git pull",
+ "alias gph = git push",
+ "alias gadd = git add",
+ "alias grm = git remove",
+ "alias srst = scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png",
+ "alias crst = scrot -s ~/Pictures/Screenshots/%b%d::%H%M%S.png",
+ "alias vim = nvim",
+ "alias bw = flatpak run com.bitwarden.desktop",
+ "alias ncmpcpp = ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug",
+ "alias xref = xrdb ~/.Xresources",
+ "alias listpkg = dnf list installed",
+ "alias lock = betterlockscreen -l",
+ "alias doom = ~/.emacs.d/bin/doom",
+ "alias extract = unp"
+]
+prompt = "starship_prompt"
+

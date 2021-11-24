@@ -12,7 +12,7 @@ Config { font            = "xft:Iosevka:weight=Regular:pixelsize=13:antialias=tr
        --   an integer for the percentage width, so 100 would be 100%.
        --   an integer for the minimum pixel height for xmobar, so 24 would force a height of at least 24 pixels.
        --   NOTE: The height should be the same as the trayer (system tray) height.
-       , position       = TopSize L 100 22
+       , position       = TopSize L 95 22
        , lowerOnStart = True
        , hideOnStart  = False
   -- = True

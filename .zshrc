@@ -17,6 +17,7 @@ antigen theme spaceship-prompt/spaceship-prompt
 # Tell Antigen that you're done.
 antigen apply 
 
+#eval "$(starship init zsh)"
 #Spaceship config
 SPACESHIP_GIT_BRANCH_COLOR=blue
 SPACESHIP_PACKAGE_SHOW=false
@@ -24,7 +25,7 @@ SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_SHOW=false
 #alias in="paru -S"
 alias in="sudo dnf install"
-alias dup="sudo dnf update && flatpak update"
+alias dup="sudo dnf distro-sync && flatpak update"
 #alias dup="sudo pacman -Sy && sudo powerpill -Su && paru -Su && flatpak update"
 #alias rp="paru -R"
 alias rp="sudo dnf remove"
@@ -44,9 +45,10 @@ alias ncmpcpp="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug"
 alias xref="xrdb ~/.Xresources"
 #alias listpkg="comm -23 <(paru -Qqett | sort) <(paru -Qqg base -g base-devel | sort | uniq)"
 alias listpkg="dnf list installed"
-alias ls="exa -la"
+#alias ls="exa -la"
 alias lock="betterlockscreen -l"
 alias doom="~/.emacs.d/bin/doom"
+alias extract="unp"
 # Copy file with a progress bar
 cpp()
 {
@@ -65,7 +67,7 @@ cpp()
 				printf "]\r"
 			}
 		}
-	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+#	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
 
 # Alias's for archives
@@ -80,25 +82,28 @@ alias ungz='tar -xvzf'
 alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 
 	# Extracts any archive(s) (if unp isn't installed)
-extract () {
-	for archive in $*; do
-		if [ -f $archive ] ; then
-			case $archive in
-				*.tar.bz2)   tar xvjf $archive    ;;
-				*.tar.gz)    tar xvzf $archive    ;;
-				*.bz2)       bunzip2 $archive     ;;
-				*.rar)       rar x $archive       ;;
-				*.gz)        gunzip $archive      ;;
-				*.tar)       tar xvf $archive     ;;
-				*.tbz2)      tar xvjf $archive    ;;
-				*.tgz)       tar xvzf $archive    ;;
-				*.zip)       unzip $archive       ;;
-				*.Z)         uncompress $archive  ;;
-				*.7z)        7z x $archive        ;;
-				*)           echo "don't know how to extract '$archive'..." ;;
-			esac
-		else
-			echo "'$archive' is not a valid file!"
-		fi
-	done
-}
+#extract () {
+#	for archive in $*; do
+#		if [ -f $archive ] ; then
+#			case $archive in
+#				*.tar.bz2)   tar xvjf $archive    ;;
+#				*.tar.gz)    tar xvzf $archive    ;;
+#				*.bz2)       bunzip2 $archive     ;;
+#				*.rar)       rar x $archive       ;;
+#				*.gz)        gunzip $archive      ;;
+#				*.tar)       tar xvf $archive     ;;
+#				*.tbz2)      tar xvjf $archive    ;;
+#				*.tgz)       tar xvzf $archive    ;;
+#				*.zip)       unzip $archive       ;;
+#				*.Z)         uncompress $archive  ;;
+#				*.7z)        7z x $archive        ;;
+#				*)           echo "don't know how to extract '$archive'..." ;;
+#			esac
+#		else
+#			echo "'$archive' is not a valid file!"
+#		fi
+#	done
+#}
+
+# Created by `pipx` on 2021-11-18 15:50:03
+export PATH="$PATH:/home/flock/.local/bin"

@@ -74,10 +74,10 @@ myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = "kitty"    -- Sets default terminal
+myTerminal = "alacritty"    -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "vivaldi-stable"  -- Sets qutebrowser as browser
+myBrowser = "vivaldi-stable"  -- set default browser
 
 myEmacs :: String
 myEmacs = "emacsclient -c -a 'emacs' "  -- Makes emacs keybindings easier to type
@@ -102,12 +102,12 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "lxsession &"
     spawnOnce "xsetroot -cursor_name Left_ptr &"
     spawnOnce "picom &"
+    spawnOnce "nextcloud &"
     spawnOnce "albert &"
     spawnOnce "nm-applet &"
-    spawnOnce "trayer --edge bottom --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x2E3440  --height 22 &"
+    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x2E3440  --height 22 &"
     spawnOnce "/usr/bin/emacs --daemon &" -- emacs daemon for the emacsclient
     -- uncomment to restore last saved wallpaper
     spawnOnce "xargs xwallpaper --stretch < ~/.xwallpaper"
@@ -373,7 +373,8 @@ myKeys =
         , ("M-S-<Return>", spawn (myTerminal))
         , ("M-b", spawn (myBrowser))
         , ("M-M1-h", spawn (myTerminal ++ " -e htop"))
-        , ("M-d", spawn "rofi -mode drun -show drun")
+        -- , ("M-d", spawn "rofi -mode drun -show drun")
+        , ("M-d", spawn "albert toggle")
 
     -- KB_GROUP Kill windows
         , ("M-S-q", kill1)     -- Kill the currently focused client
@@ -387,7 +388,7 @@ myKeys =
 
     -- KB_GROUP Floating windows
         , ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout
-        , ("M-t", withFocused $ windows . W.sink)  -- Push floating window back to tile
+        , ("M-C-t", withFocused $ windows . W.sink)  -- Push floating window back to tile
         , ("M-S-t", sinkAll)                       -- Push ALL floating windows to tile
 
     -- KB_GROUP Increase/decrease spacing (gaps)
@@ -462,7 +463,7 @@ myKeys =
         , ("M-u <Space>", spawn "mocp --toggle-pause")
 
     -- KB_GROUP Emacs (CTRL-e followed by a key)
-        , ("C-e e", spawn (myEmacs ++ ("--eval '(dashboard-refresh-buffer)'")))   -- emacs dashboard
+        , ("C-e e", spawn (myEmacs)) -- emacs dashboard
         , ("C-e b", spawn (myEmacs ++ ("--eval '(ibuffer)'")))   -- list buffers
         , ("C-e d", spawn (myEmacs ++ ("--eval '(dired nil)'"))) -- dired
         , ("C-e i", spawn (myEmacs ++ ("--eval '(erc)'")))       -- erc irc client
@@ -470,9 +471,12 @@ myKeys =
         , ("C-e s", spawn (myEmacs ++ ("--eval '(eshell)'")))    -- eshell
         , ("C-e t", spawn (myEmacs ++ ("--eval '(mastodon)'")))  -- mastodon.el
         , ("C-e v", spawn (myEmacs ++ ("--eval '(+vterm/here nil)'"))) -- vterm if on Doom Emacs
-        , ("C-e w", spawn (myEmacs ++ ("--eval '(doom/window-maximize-buffer(eww \"distrotube.com\"))'"))) -- eww browser if on Doom Emacs
+        , ("C-e w", spawn (myEmacs ++ ("--eval '(doom/window-maximize-buffer(eww \"ecosia.com\"))'"))) -- eww browser if on Doom Emacs
         , ("C-e a", spawn (myEmacs ++ ("--eval '(emms)' --eval '(emms-play-directory-tree \"~/Music/\")'")))
-
+    
+    -- Screenshot Binds
+        , ("M-t t", spawn "scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png && notify-send 'Full Screenshot Saved'")   -- full screenshot
+        , ("M-t r", spawn "scrot -s ~/Pictures/Screenshots/%b%d::%H%M%S.png && notify-send 'Region Screenshot Saved'")  -- region screenshot
     -- KB_GROUP Multimedia Keys
         , ("<XF86AudioPlay>", spawn "mocp --play")
         , ("<XF86AudioPrev>", spawn "mocp --previous")
