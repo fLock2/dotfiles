@@ -14,6 +14,7 @@ startup = [
  "alias gph = git push",
  "alias gadd = git add",
  "alias grm = git remove",
+ "alias em = emacsclient -c -a 'emacs'",
  "alias srst = scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png",
  "alias crst = scrot -s ~/Pictures/Screenshots/%b%d::%H%M%S.png",
  "alias vim = nvim",
@@ -26,4 +27,3 @@ startup = [
  "alias extract = unp"
 ]
 prompt = "starship_prompt"
-

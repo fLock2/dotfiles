@@ -52,8 +52,5 @@
 (package! darkroom)
 (package! poet-theme)
 (package! emms)
-(package! vterm)
-(package! markdown-mode)
 (package! mips-mode)
 (package! rustic)
-(package! writegood-mode)
