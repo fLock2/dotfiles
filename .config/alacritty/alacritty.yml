@@ -312,54 +312,93 @@ font:
   #
   #indexed_colors: []
 # Nord Colors
+#colors:
+#  primary:
+#    background: '#2e3440'
+#    foreground: '#d8dee9'
+#    dim_foreground: '#a5abb6'
+#  cursor:
+#    text: '#2e3440'
+#    cursor: '#d8dee9'
+#  vi_mode_cursor:
+#    text: '#2e3440'
+#    cursor: '#d8dee9'
+#  selection:
+#    text: CellForeground
+#    background: '#4c566a'
+#  search:
+#    matches:
+#      foreground: CellBackground
+#      background: '#88c0d0'
+#    bar:
+#      background: '#434c5e'
+#      foreground: '#d8dee9'
+#  normal:
+#    black: '#3b4252'
+#    red: '#bf616a'
+#    green: '#a3be8c'
+#    yellow: '#ebcb8b'
+#    blue: '#81a1c1'
+#    magenta: '#b48ead'
+#    cyan: '#88c0d0'
+#    white: '#e5e9f0'
+#  bright:
+#    black: '#4c566a'
+#    red: '#bf616a'
+#    green: '#a3be8c'
+#    yellow: '#ebcb8b'
+#    blue: '#81a1c1'
+#    magenta: '#b48ead'
+#    cyan: '#8fbcbb'
+#    white: '#eceff4'
+#  dim:
+#    black: '#373e4d'
+#    red: '#94545d'
+#    green: '#809575'
+#    yellow: '#b29e75'
+#    blue: '#68809a'
+#    magenta: '#8c738c'
+#    cyan: '#6d96a5'
+#    white: '#aeb3bb'
+
+
+# Catppuccin!
 colors:
+  # Default colors
   primary:
-    background: '#2e3440'
-    foreground: '#d8dee9'
-    dim_foreground: '#a5abb6'
+    background: '0x1E1D2F'
+    foreground: '0xD9E0EE'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  vi_mode_cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  selection:
-    text: CellForeground
-    background: '#4c566a'
-  search:
-    matches:
-      foreground: CellBackground
-      background: '#88c0d0'
-    bar:
-      background: '#434c5e'
-      foreground: '#d8dee9'
+    text: '0x1E1D2F'
+    cursor: '0xF5E0DC'
+
+  # Normal colors
   normal:
-    black: '#3b4252'
-    red: '#bf616a'
-    green: '#a3be8c'
-    yellow: '#ebcb8b'
-    blue: '#81a1c1'
-    magenta: '#b48ead'
-    cyan: '#88c0d0'
-    white: '#e5e9f0'
+    black:   '0x6E6C7E'
+    red:     '0xF28FAD'
+    green:   '0xABE9B3'
+    yellow:  '0xFAE3B0'
+    blue:    '0x96CDFB'
+    magenta: '0xF5C2E7'
+    cyan:    '0x89DCEB'
+    white:   '0xD9E0EE'
+
+  # Bright colors
   bright:
-    black: '#4c566a'
-    red: '#bf616a'
-    green: '#a3be8c'
-    yellow: '#ebcb8b'
-    blue: '#81a1c1'
-    magenta: '#b48ead'
-    cyan: '#8fbcbb'
-    white: '#eceff4'
-  dim:
-    black: '#373e4d'
-    red: '#94545d'
-    green: '#809575'
-    yellow: '#b29e75'
-    blue: '#68809a'
-    magenta: '#8c738c'
-    cyan: '#6d96a5'
-    white: '#aeb3bb'
+    black:   '0x988BA2'
+    red:     '0xF28FAD'
+    green:   '0xABE9B3'
+    yellow:  '0xFAE3B0'
+    blue:    '0x96CDFB'
+    magenta: '0xF5C2E7'
+    cyan:    '0x89DCEB'
+    white:   '0xD9E0EE'
+
+  indexed_colors:
+    - { index: 16, color: '0xF8BD96' }
+    - { index: 17, color: '0xF5E0DC' }
 # Bell
 #
 # The bell is rung every time the BEL control character is received.
@@ -405,8 +444,8 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
-
+# background_opacity: 0.9
+window.opacity: 0.9
 #selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
@@ -415,9 +454,9 @@ background_opacity: 0.9
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-#cursor:
+cursor:
   # Cursor style
-  #style:
+  style:
     # Cursor shape
     #
     # Values for `shape`:
@@ -433,7 +472,7 @@ background_opacity: 0.9
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    #blinking: Off
+    blinking: Off
 
   # Vi mode cursor style
   #
@@ -441,18 +480,19 @@ background_opacity: 0.9
   # the style of the active value of the normal cursor.
   #
   # See `cursor.style` for available options.
-  #vi_mode_style: None
+  vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  #blink_interval: 750
+  blink_interval: 750
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
-  #unfocused_hollow: true
+  unfocused_hollow: true
 
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
-  #thickness: 0.15
+  thickness: 0.15
+  custom_cursor_colors: true
 
 # Live config reload (changes require restart)
 #live_config_reload: true

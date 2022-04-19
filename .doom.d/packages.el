@@ -54,3 +54,5 @@
 (package! emms)
 (package! mips-mode)
 (package! rustic)
+(package! company-tabnine)
+(package! counsel)
