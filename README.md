@@ -3,6 +3,7 @@ This is a dotfile chezmoi script based on [logandonley's config](https://raw.git
 
 This automated setup is currently only configured for Fedora machines.
 
+This repo includes theming from other projects, so the download size will be big
 ## How to run
 
 ```shell
