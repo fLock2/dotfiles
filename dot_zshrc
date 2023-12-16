@@ -1,0 +1,79 @@
+#STARSHIP
+eval "$(starship init zsh)"
+
+#alias in="paru -S"
+alias in="sudo dnf install"
+alias dup="sudo dnf distro-sync && flatpak update && nix-env --upgrade && doom upgrade"
+alias pup="sudo dnf upgrade && flatpak update && nix-env --upgrade"
+#alias dup="sudo pacman -Sy && sudo powerpill -Su && paru -Su && flatpak update"
+#alias rp="paru -R"
+alias rp="sudo dnf remove"
+#alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
+alias cleancache="sudo dnf clean all"
+alias fuck='sudo $(fc -ln -1)'
+alias gcl="git clone"
+alias gcm="git commit -m"
+alias gpl="git pull"
+alias gph="git push"
+alias gad="git add"
+alias bw="flatpak run com.bitwarden.desktop"
+alias grm="git remove"
+alias em="emacsclient -c -a 'emacs'"
+alias srst="scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png" 
+alias crst="scrot -s ~/Pictures/Screenshots/%b%d::%H%M%S.png"
+alias vim="nvim"
+alias ncmpcpp="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug"
+alias xref="xrdb ~/.Xresources"
+#alias listpkg="comm -23 <(paru -Qqett | sort) <(paru -Qqg base -g base-devel | sort | uniq)"
+alias listpkg="dnf list installed"
+alias ls="exa -la"
+#alias lock="betterlockscreen -l"
+alias swlock="swaylock -i ~/Pictures/kinounderthestars.jpg --clock --effect-blur 3x5 --indicator-idle-visible --indicator-caps-lock --effect-vignette 0.5:0.5 --font 'Helvetica Neue' --bs-hl-color eb6f92ff --key-hl-color f6c177ff --inside-color 23213662 --inside-clear-color ea9a97ff --inside-ver-color 39355232 --inside-wrong-color eb6f9262 --text-color e0def4ff --text-clear-color e0def4ff --text-ver-color e0def4ff --text-wrong-color e0def4ff --ring-color c4a7e7ff --ring-clear-color ea9a97ff --ring-ver-color 3e8fb0ff --ring-wrong-color eb6f92ff"
+alias doom="~/.config/emacs/bin/doom"
+alias extract="unpack"
+alias alcs="alacritty-colorscheme"
+alias colortest="~/scripts/colortest.sh"
+alias gputop="sudo intel_gpu_top"
+
+
+# Aliases for archives
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
+# Count all files (recursively) in the current folder
+alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+
+	# Extracts any archive(s) (if unp isn't installed)
+#extract () {
+#	for archive in $*; do
+#		if [ -f $archive ] ; then
+#			case $archive in
+#				*.tar.bz2)   tar xvjf $archive    ;;
+#				*.tar.gz)    tar xvzf $archive    ;;
+#				*.bz2)       bunzip2 $archive     ;;
+#				*.rar)       rar x $archive       ;;
+#				*.gz)        gunzip $archive      ;;
+#				*.tar)       tar xvf $archive     ;;
+#				*.tbz2)      tar xvjf $archive    ;;
+#				*.tgz)       tar xvzf $archive    ;;
+#				*.zip)       unzip $archive       ;;
+#				*.Z)         uncompress $archive  ;;
+#				*.7z)        7z x $archive        ;;
+#				*)           echo "don't know how to extract '$archive'..." ;;
+#			esac
+#		else
+#			echo "'$archive' is not a valid file!"
+#		fi
+#	done
+#}
+
+# Created by `pipx` on 2021-11-18 15:50:03
+export PATH="$PATH:/home/flock/.local/bin"
+
+[ -f "/home/flock/.ghcup/env" ] && source "/home/flock/.ghcup/env" # ghcup-env
+
+if [ -e /home/flock/.nix-profile/etc/profile.d/nix.sh ]; then . /home/flock/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
