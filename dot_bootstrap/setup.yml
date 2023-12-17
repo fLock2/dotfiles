@@ -13,112 +13,24 @@
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
 
-    - name: Install packages
-      ansible.builtin.dnf:
+    - homebrew:
         name:
           - git
           - btop
           - neovim
-          - neofetch
           - emacs
-          - scrot
-          - swaylock
           - exa
+          - starship
+          - vivaldi
           - firefox
-          - ulauncher
-          - gnome-tweaks
-          - gcc
           - ripgrep
-          - fd-find
+          - fd
           - unzip
-          - zsh
-          - fzf
-          - tmux
-          - make
-          - cmake
-          - patch
-          - bzip2
-          - sqlite
           - fd-find
-          - autoconf
-        state: present
-
-    - name: Change shell to zsh
-      ansible.builtin.user:
-        name: "{{ remote_regular_user }}"
-        shell: /usr/bin/zsh
-
-    - name: Install DNF plugins core
-      ansible.builtin.dnf:
-        name: dnf-plugins-core
-        state: present
-
-    - name: Enable the RPMFusion Free repository
-      dnf:
-        name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
-        state: present
-      when: ansible_distribution == 'Fedora'
-
-    - name: Enable the RPMFusion Nonfree repository
-      dnf:
-        name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
-        state: present
-      when: ansible_distribution == 'Fedora'
-
-    - name: Install Ffmpeg
-      ansible.builtin.dnf:
-        name: ffmpeg
-        state: present
-
-    - name: Enable Fedora Copr for better_fonts
-      community.general.copr:
-        name: hyperreal/better_fonts
-
-    - name: Install better_fonts
-      ansible.builtin.dnf:
-        name:
-          - fontconfig-font-replacements
-          - fontconfig-enhanced-defaults
-        state: present
-
-    - name: Enable Fedora Copr for starship
-      community.general.copr:
-        name: atim/starship 
-
-    - name: Install starship
-      ansible.builtin.dnf:
-        name: starship
-        state: present
-
-
-    - name: Add Vivaldi Repo
-      ansible.builtin.yum_repository:
-        name: vivaldi-stable
-        description: Vivaldi Browser
-        baseurl: https://repo.vivaldi.com/archive/rpm/$basearch
-        gpgkey: https://repo.vivaldi.com/archive/linux_signing_key.pub
-        gpgcheck: true
-        enabled: true
-
-    - name: Import Vivaldi GPG Key
-      ansible.builtin.rpm_key:
-        key: https://repo.vivaldi.com/archive/linux_signing_key.pub
-        state: present
-
-    - name: Install Vivaldi
-      ansible.builtin.dnf:
-        name: vivaldi-stable
-        state: present
-
-    - name: Install Flatpak packages
-      community.general.flatpak:
-        name:
-          - com.bitwarden.desktop
-          - com.discordapp.Discord
-          - com.nextcloud.desktopclient.nextcloud
-          - md.obsidian.Obsidian
-          - org.kde.krita
-          - org.zotero.Zotero
-          - com.valvesoftware.Steam
-          - re.sonny.Tangram
+          - bitwarden
+          - hiddenbar
+          - rectangle
+          - shottr
+          - cheatsheet
+          - bitwarden
         state: present
