@@ -2,7 +2,8 @@
 eval "$(starship init zsh)"
 
 alias in="brew install"
-alias dup="brew update && brew upgrade"
+alias dup="brew upgrade"
+alias pup="brew upgrade"
 alias rp="brew uninstall"
 #alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
 alias cleancache="sudo dnf clean all"

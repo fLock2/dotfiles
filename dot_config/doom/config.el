@@ -109,5 +109,6 @@
 (add-hook 'chezmoi-mode-hook #'chezmoi-evil)
 (map! "C-c c f" #'chezmoi-find
       "C-c c s" #'chezmoi-write
+      "C-c c o" #'chezmoi-open-other
       "C-c c d" #'chezmoi-diff)
 (setq-default chezmoi-template-display-p t)   ;; Display template values in all source buffers.
