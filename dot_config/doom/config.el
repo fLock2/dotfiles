@@ -23,9 +23,9 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-(setq doom-font (font-spec :family "Fragment Mono" :size 18)
+(setq doom-font (font-spec :family "Fragment Mono" :size 28)
       ;;doom-variable-pitch-font (font-spec :family "ETBembo" :size 18)
-      doom-variable-pitch-font (font-spec :family "Helvetica Neue" :size 18))
+      doom-variable-pitch-font (font-spec :family "Helvetica Neue" :size 28))
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -109,5 +109,6 @@
 (add-hook 'chezmoi-mode-hook #'chezmoi-evil)
 (map! "C-c c f" #'chezmoi-find
       "C-c c s" #'chezmoi-write
+      "C-c c o" #'chezmoi-open-other
       "C-c c d" #'chezmoi-diff)
 (setq-default chezmoi-template-display-p t)   ;; Display template values in all source buffers.
