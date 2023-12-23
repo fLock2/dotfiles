@@ -18,11 +18,13 @@
           - git
           - btop
           - neovim
+          - discord
           - emacs
           - exa
           - starship
           - vivaldi
           - firefox
+          - arc
           - ripgrep
           - fd
           - unzip
@@ -33,4 +35,9 @@
           - shottr
           - cheatsheet
           - bitwarden
+          - nextcloud
+          - latest
+          - raycast
+          - obsidian
+          - mac-mouse-fix
         state: present

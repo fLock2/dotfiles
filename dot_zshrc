@@ -2,8 +2,8 @@
 eval "$(starship init zsh)"
 
 alias in="brew install"
-alias dup="brew upgrade"
-alias pup="brew upgrade"
+alias dup="brew update && brew outdated && brew upgrade && brew cleanup"
+alias pup="brew update"
 alias rp="brew uninstall"
 #alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
 alias cleancache="sudo dnf clean all"
@@ -21,6 +21,7 @@ alias listpkg="brew list"
 alias ls="exa -la"
 alias doom="~/.config/emacs/bin/doom"
 alias extract="unpack"
+alias python="python3"
 
 
 # Aliases for archives
