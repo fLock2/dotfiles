@@ -25,6 +25,7 @@
           - git
           - libvterm
           - make
+          - mas
           - neovim
           - ripgrep
           - starship
@@ -51,3 +52,10 @@
           - rectangle
           - shottr
         state: present
+
+    - name: install app store programs
+      community.general.mas:
+        id:
+          - 975890633 # HotKey
+          - 1352778147 # Bitwarden
+          - 1355679052 # Dropover
