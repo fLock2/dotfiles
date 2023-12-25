@@ -1,7 +1,7 @@
 ---
 - name: Machine setup
   hosts: localhost
-  become: true
+  become: false
   connection: local
   gather_facts: true
   vars:
@@ -11,33 +11,42 @@
   tasks:
     - name: Get my user
       ansible.builtin.set_fact:
-        remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+        remote_regular_user: "{{ansible_user_id}}"
 
-    - homebrew:
+    - name: install homebrew formulae packages
+      become: false
+      homebrew:
         name:
-          - git
           - btop
+          - cmake
+          - exa
+          - fd
+          - gcc
+          - git
+          - libvterm
+          - make
           - neovim
+          - ripgrep
+          - starship
+          - unzip
+        update_homebrew: yes
+        state: present
+
+    - name: install homebrew cask packages
+      become: false
+      homebrew_cask:
+        name:
+          - arc
+          - cheatsheet
           - discord
           - emacs
-          - exa
-          - starship
-          - vivaldi
           - firefox
-          - arc
-          - ripgrep
-          - fd
-          - unzip
-          - fd-find
-          - bitwarden
           - hiddenbar
+          - latest
+          - mac-mouse-fix
+          - nextcloud
+          - obsidian
+          - raycast
           - rectangle
           - shottr
-          - cheatsheet
-          - bitwarden
-          - nextcloud
-          - latest
-          - raycast
-          - obsidian
-          - mac-mouse-fix
         state: present
