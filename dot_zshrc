@@ -65,3 +65,6 @@ export PATH="$PATH:/home/flock/.local/bin"
 [ -f "/home/flock/.ghcup/env" ] && source "/home/flock/.ghcup/env" # ghcup-env
 
 if [ -e /home/flock/.nix-profile/etc/profile.d/nix.sh ]; then . /home/flock/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
