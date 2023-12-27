@@ -51,6 +51,7 @@
           - raycast
           - rectangle
           - shottr
+          - zotero
         state: present
 
     - name: install app store programs
@@ -59,3 +60,4 @@
           - 975890633 # HotKey
           - 1352778147 # Bitwarden
           - 1355679052 # Dropover
+          - 1441195209 # Wireguard
