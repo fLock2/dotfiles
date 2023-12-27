@@ -89,3 +89,4 @@ case $TERM in
   *)
       export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\u@\h \w] \\[$(tput sgr0)\]";;
 esac
+. "$HOME/.cargo/env"

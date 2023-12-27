@@ -123,3 +123,58 @@
             #- com.valvesoftware.Steam
           - re.sonny.Tangram
         state: present
+
+    - name: Create themes directory
+      ansible.builtin.file:
+        path: /home/flock/.themes/rose-pine
+        state: directory
+        mode: '0755'
+        owner: flock
+
+    - name: Create icons directory
+      ansible.builtin.file:
+        path: /home/flock/.icons/rose-pine-icons
+        state: directory
+        mode: '0755'
+        owner: flock
+
+    - name: Download Rose Pine GTK
+      ansible.builtin.get_url:
+        url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/gtk3.tar.gz
+        dest: /home/flock/.themes/gtk3.tar.gz
+        mode: "0777"
+        owner: flock
+
+    - name: Download Rose Pine Icons
+      ansible.builtin.get_url:
+        url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-icons.tar.gz
+        dest: /home/flock/.icons/rose-pine-icons.tar.gz
+        mode: "0777"
+        owner: flock
+
+    - name: extract theme
+      ansible.builtin.unarchive:
+        src: /home/flock/.themes/gtk3.tar.gz
+        dest: /home/flock/.themes/
+        owner: flock
+
+
+    - name: extract icons
+      ansible.builtin.unarchive:
+        src: /home/flock/.icons/rose-pine-icons.tar.gz
+        dest: /home/flock/.themes/
+        owner: flock
+
+
+    - name: copy theme
+      ansible.builtin.copy:
+        src: /home/flock/.themes/gtk3/rose-pine-gtk
+        dest: /home/flock/.themes/
+        owner: flock
+
+
+    - name: copy icons
+      ansible.builtin.copy:
+        src: /home/flock/.icons/icons/rose-pine-icons
+        dest: /home/flock/.icons/
+        owner: flock
