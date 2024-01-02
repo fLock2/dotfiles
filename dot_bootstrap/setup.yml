@@ -23,10 +23,12 @@
           - fd
           - gcc
           - git
+          - lazygit
           - libvterm
           - make
           - mas
           - neovim
+          - nushell
           - ripgrep
           - starship
           - unzip
@@ -60,4 +62,4 @@
           - 975890633 # HotKey
           - 1352778147 # Bitwarden
           - 1355679052 # Dropover
-          - 1441195209 # Wireguard
+          - 1451685025 # Wireguard

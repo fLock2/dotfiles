@@ -20,7 +20,7 @@ alias vim="nvim"
 alias listpkg="brew list"
 alias ls="exa -la"
 alias doom="~/.config/emacs/bin/doom"
-alias extract="unpack"
+alias extract="unp"
 alias python="python3"
 
 
