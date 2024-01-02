@@ -1,0 +1,2 @@
+export PATH=/opt/homebrew/bin:/Users/flock/.cargo/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/flock/.local/bin
+export PATH=/opt/homebrew/bin:/Users/flock/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/flock/.local/bin
