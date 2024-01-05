@@ -764,7 +764,7 @@ $env.config = {
 use ~/.cache/starship/init.nu
 # aliases
 alias in = brew install
-alias dup = brew update and brew outdated and brew upgrade and brew cleanup
+alias dup = brew update; brew outdated; brew upgrade; brew cleanup
 alias pup = brew update
 alias rp = brew uninstall
 #alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
@@ -784,6 +784,7 @@ alias ll = exa -la
 alias doom = ~/.config/emacs/bin/doom
 alias extract = unp
 alias python = python3
+alias pip = pip3
 
 
 # Aliases for archives
@@ -796,3 +797,13 @@ alias python = python3
 
 # Count all files (recursively) in the current folder
 # alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+
+# source bash profile
+bash -c $"source ($env.HOME)/.bash_profile && env"
+    | lines
+    | parse "{n}={v}"
+    | filter { |x| (not $x.n in $env) or $x.v != ($env | get $x.n) }
+    | where not n in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]
+    | transpose --header-row
+    | into record
+    | load-env

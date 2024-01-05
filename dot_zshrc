@@ -1,3 +1,4 @@
+source ~/.bash_profile
 #STARSHIP
 eval "$(starship init zsh)"
 
