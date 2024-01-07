@@ -229,10 +229,10 @@ $env.config = {
     use_grid_icons: true
     footer_mode: "25" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
-    buffer_editor: "nvim" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
+    buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
     use_ansi_coloring: true
     bracketed_paste: true # enable bracketed paste, currently useless on windows
-    edit_mode: vi # emacs, vi
+    edit_mode: emacs # emacs, vi
     shell_integration: false # enables terminal shell integration. Off by default, as some terminals have issues with this.
     render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
     use_kitty_protocol: false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this.
@@ -760,15 +760,17 @@ $env.config = {
         }
     ]
 }
-
 use ~/.cache/starship/init.nu
 # aliases
 alias in = brew install
-alias dup = brew update; brew outdated; brew upgrade; brew cleanup
+def dup [] {
+    brew update
+    brew outdated
+    brew upgrade
+    brew cleanup
+}
 alias pup = brew update
 alias rp = brew uninstall
-#alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
-#alias cleancache = "sudo dnf clean all"
 alias fuck = sudo !!
 alias gcl = git clone
 alias gcm = git commit -m
@@ -778,7 +780,6 @@ alias gad = git add
 alias grm = git remove
 alias em = emacsclient -c -a 'emacs'
 alias vim = nvim
-#alias listpkg="comm -23 <(paru -Qqett | sort) <(paru -Qqg base -g base-devel | sort | uniq)"
 alias listpkg = brew list
 alias ll = exa -la
 alias doom = ~/.config/emacs/bin/doom
@@ -787,23 +788,3 @@ alias python = python3
 alias pip = pip3
 
 
-# Aliases for archives
-# alias mktar='tar -cvf'
-# alias mkbz2='tar -cvjf'
-# alias mkgz='tar -cvzf'
-# alias untar='tar -xvf'
-# alias unbz2='tar -xvjf'
-# alias ungz='tar -xvzf'
-
-# Count all files (recursively) in the current folder
-# alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
-
-# source bash profile
-bash -c $"source ($env.HOME)/.bash_profile && env"
-    | lines
-    | parse "{n}={v}"
-    | filter { |x| (not $x.n in $env) or $x.v != ($env | get $x.n) }
-    | where not n in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]
-    | transpose --header-row
-    | into record
-    | load-env
