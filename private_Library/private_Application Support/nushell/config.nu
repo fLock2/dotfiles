@@ -762,12 +762,14 @@ $env.config = {
 }
 use ~/.cache/starship/init.nu
 # aliases
+alias doom = ~/.config/emacs/bin/doom
 alias in = brew install
 def dup [] {
     brew update
     brew outdated
     brew upgrade
     brew cleanup
+    doom upgrade
 }
 alias pup = brew update
 alias rp = brew uninstall
@@ -782,7 +784,6 @@ alias em = emacsclient -c -a 'emacs'
 alias vim = nvim
 alias listpkg = brew list
 alias ll = exa -la
-alias doom = ~/.config/emacs/bin/doom
 alias extract = unp
 alias python = python3
 alias pip = pip3
