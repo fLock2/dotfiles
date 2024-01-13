@@ -766,7 +766,8 @@ alias doom = ~/.config/emacs/bin/doom
 alias in = sudo dnf install
 def dup [] {
     sudo dnf distro-sync
-    flatpak nix-env --upgrade | update column value
+    flatpak update
+    #nix-env --upgrade
     doom upgrade
 }
 alias rp = sudo dnf remove
