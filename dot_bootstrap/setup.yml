@@ -170,18 +170,44 @@
         name: vivaldi-stable
         state: present
 
-    - name: Install Flatpak packages
+    - name: Install Flatpak packages (x86_64)
       community.general.flatpak:
-        name: # Some Commented out b/c no arm64 flatpak release
-          # - com.bitwarden.desktop
-          # - com.discordapp.Discord
+        name:
+          - com.bitwarden.desktop
+          - com.discordapp.Discord
           - com.nextcloud.desktopclient.nextcloud
           - md.obsidian.Obsidian
           - org.kde.krita
-          # - org.zotero.Zotero
-          # - com.valvesoftware.Steam
+          - org.zotero.Zotero
+          - com.valvesoftware.Steam
           - re.sonny.Tangram
         state: present
+      when: ansible_architecture == "x86_64"
+
+    - name: Install Flatpak packages (aarch64)
+      community.general.flatpak:
+        name:
+          - xyz.armcord.ArmCord
+          - com.nextcloud.desktopclient.nextcloud
+          - md.obsidian.Obsidian
+          - org.kde.krita
+          - re.sonny.Tangram
+        state: present
+      when: ansible_architecture == "aarch64"
+
+
+    - name: Download Zotero aarch64 RPM
+      ansible.builtin.get_url:
+        url: https://flock2.s-ul.eu/cTT3co7U
+        dest: /home/flock/zotero-6.0.30-2.aarch64.rpm
+        mode: '0775'
+      when: ansible_architecture == "aarch64"
+
+    - name: Install Zotero aarch64 RPM
+      ansible.builtin.dnf:
+        name: /home/flock/zotero-6.0.30-2.aarch64.rpm
+        state: present
+      when: ansible_architecture == "aarch64"
 
     - name: Download Rose Pine Cursors
       ansible.builtin.get_url:
