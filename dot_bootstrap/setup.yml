@@ -13,6 +13,17 @@
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
 
+    - name: Get CPU Architecture
+      ansible.builtin.set_fact:
+        architecture: "{{ ansible_architecture }}"
+
+    - name: Get CPU Architecture
+      ansible.builtin.set_fact:
+        version_id: "{{ ansible_distribution_major_version }}"
+
+    - name: Distribution major version
+      debug: msg="{{ version_id }}"
+
     - name: Install packages
       ansible.builtin.dnf:
         name:
@@ -21,7 +32,6 @@
           - neovim
           - neofetch
           - emacs
-          - scrot
           - nodejs
           - firefox
           - ulauncher
@@ -32,6 +42,7 @@
           - unzip
           - zsh
           - fzf
+          - bat
           - tmux
           - make
           - cmake
@@ -39,6 +50,7 @@
           - bzip2
           - fd-find
           - autoconf
+          - zoxide
         state: present
 
     - name: check if cargo is installed
@@ -66,21 +78,20 @@
       community.general.cargo:
         name: eza
 
+    - name: Install zoxide
+      shell: cargo install --git https://github.com/ajeetdsouza/zoxide
+
     - name: Enable nushell copr repo
       community.general.copr:
         host: copr.fedorainfracloud.org
         state: enabled
         name: atim/nushell
+        chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install nushell
       ansible.builtin.dnf:
         name: nushell
         state: present
-
-    - name: Change shell to nushell
-      ansible.builtin.user:
-        name: "{{ remote_regular_user }}"
-        shell: /usr/bin/nu
 
     - name: Install DNF plugins core
       ansible.builtin.dnf:
@@ -92,6 +103,7 @@
         host: copr.fedorainfracloud.org
         state: enabled
         name: atim/starship
+        chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install starship
       ansible.builtin.dnf:
@@ -103,6 +115,7 @@
         host: copr.fedorainfracloud.org
         state: enabled
         name: atim/lazygit
+        chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install lazygit
       ansible.builtin.dnf:
@@ -113,22 +126,23 @@
       dnf:
         name: "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
         state: present
-        when: ansible_distribution == 'Fedora'
+      when: ansible_distribution == 'Fedora'
 
     - name: Enable the RPMFusion Nonfree repository
       dnf:
         name: "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
         state: present
-        when: ansible_distribution == 'Fedora'
+      when: ansible_distribution == 'Fedora'
 
-    - name: Install Ffmpeg
-      ansible.builtin.dnf:
-        name: ffmpeg
-        state: present
+    # - name: Install Ffmpeg
+    #   ansible.builtin.dnf:
+    #     name: ffmpeg
+    #     state: present
 
     - name: Enable Fedora Copr for better_fonts
       community.general.copr:
         name: hyperreal/better_fonts
+        chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install better_fonts
       ansible.builtin.dnf:
@@ -158,65 +172,81 @@
 
     - name: Install Flatpak packages
       community.general.flatpak:
-        name:
-          - com.bitwarden.desktop
-          - com.discordapp.Discord
+        name: # Some Commented out b/c no arm64 flatpak release
+          # - com.bitwarden.desktop
+          # - com.discordapp.Discord
           - com.nextcloud.desktopclient.nextcloud
           - md.obsidian.Obsidian
           - org.kde.krita
-          - org.zotero.Zotero
-          - com.valvesoftware.Steam
+          # - org.zotero.Zotero
+          # - com.valvesoftware.Steam
           - re.sonny.Tangram
         state: present
 
-    - name: Create themes directory
-      ansible.builtin.file:
-        path: /home/flock/.themes/rose-pine
-        state: directory
-        mode: "0755"
-        owner: flock
-
-    - name: Create icons directory
-      ansible.builtin.file:
-        path: /home/flock/.icons/rose-pine-icons
-        state: directory
-        mode: "0755"
-        owner: flock
-
-    - name: Download Rose Pine GTK
+    - name: Download Rose Pine Cursors
       ansible.builtin.get_url:
-        url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/gtk3.tar.gz
-        dest: /home/flock/.themes/gtk3.tar.gz
+        url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePine-Linux.tar.xz
+        dest: /home/flock/Downloads/BreezeX-RosePine-Linux.tar.xz
         mode: "0777"
         owner: flock
 
-    - name: Download Rose Pine Icons
-      ansible.builtin.get_url:
-        url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-icons.tar.gz
-        dest: /home/flock/.icons/rose-pine-icons.tar.gz
-        mode: "0777"
-        owner: flock
+    - name: Install Rose Pine Cursors
+      shell: tar -xvf /home/flock/Downloads/BreezeX-RosePine-Linux.tar.xz -C /home/flock/.local/share/icons
+      ignore_errors: yes
 
-    - name: extract theme
-      ansible.builtin.unarchive:
-        src: /home/flock/.themes/gtk3.tar.gz
-        dest: /home/flock/.themes/
-        owner: flock
+    - name: Install SDDM Rose Pine Theme
+      copy:
+        src: /home/flock/sddm-rose-pine
+        dest: /usr/share/sddm/themes/
+    # Used for GNOME, now not necessary
+    # - name: Create themes directory
+    #   ansible.builtin.file:
+    #     path: /home/flock/.themes/rose-pine
+    #     state: directory
+    #     mode: "0755"
+    #     owner: flock
 
-    - name: extract icons
-      ansible.builtin.unarchive:
-        src: /home/flock/.icons/rose-pine-icons.tar.gz
-        dest: /home/flock/.themes/
-        owner: flock
+    # - name: Create icons directory
+    #   ansible.builtin.file:
+    #     path: /home/flock/.icons/rose-pine-icons
+    #     state: directory
+    #     mode: "0755"
+    #     owner: flock
 
-    - name: copy theme
-      ansible.builtin.copy:
-        src: /home/flock/.themes/gtk3/rose-pine-gtk
-        dest: /home/flock/.themes/
-        owner: flock
+    # - name: Download Rose Pine GTK
+    #   ansible.builtin.get_url:
+    #     url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/gtk3.tar.gz
+    #     dest: /home/flock/.themes/gtk3.tar.gz
+    #     mode: "0777"
+    #     owner: flock
 
-    - name: copy icons
-      ansible.builtin.copy:
-        src: /home/flock/.icons/icons/rose-pine-icons
-        dest: /home/flock/.icons/
-        owner: flock
+    # - name: Download Rose Pine Icons
+    #   ansible.builtin.get_url:
+    #     url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-icons.tar.gz
+    #     dest: /home/flock/.icons/rose-pine-icons.tar.gz
+    #     mode: "0777"
+    #     owner: flock
+
+    # - name: extract theme
+    #   ansible.builtin.unarchive:
+    #     src: /home/flock/.themes/gtk3.tar.gz
+    #     dest: /home/flock/.themes/
+    #     owner: flock
+
+    # - name: extract icons
+    #   ansible.builtin.unarchive:
+    #     src: /home/flock/.icons/rose-pine-icons.tar.gz
+    #     dest: /home/flock/.themes/
+    #     owner: flock
+
+    # - name: copy theme
+    #   ansible.builtin.copy:
+    #     src: /home/flock/.themes/gtk3/rose-pine-gtk
+    #     dest: /home/flock/.themes/
+    #     owner: flock
+
+    # - name: copy icons
+    #   ansible.builtin.copy:
+    #     src: /home/flock/.icons/icons/rose-pine-icons
+    #     dest: /home/flock/.icons/
+    #     owner: flock

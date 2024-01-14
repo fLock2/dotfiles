@@ -761,6 +761,7 @@ $env.config = {
     ]
 }
 use ~/.cache/starship/init.nu
+source ~/.zoxide.nu
 # aliases
 alias doom = ~/.config/emacs/bin/doom
 alias in = sudo dnf install
