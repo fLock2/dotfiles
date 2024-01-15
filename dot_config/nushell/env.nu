@@ -105,7 +105,7 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend '~/.local/bin')
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 # zoxide config
-# zoxide init nushell | str replace "$env.PWD -- $rest" "$env.PWD -- ...$rest" --all | save -f ~/.zoxide.nu # Broken for now
+zoxide init nushell | str replace "-- $rest" "-- ...$rest" --all | save -f ~/.zoxide.nu # Broken for now
 $env.FZF_DEFAULT_OPTS = "
 	--color=fg:#908caa,bg:#191724,hl:#ebbcba
 	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba

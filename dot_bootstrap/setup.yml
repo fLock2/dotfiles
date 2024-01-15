@@ -1,7 +1,7 @@
 ---
 - name: Machine setup
   hosts: localhost
-  become: true
+  become: false
   connection: local
   gather_facts: true
   vars:
@@ -11,7 +11,7 @@
   tasks:
     - name: Get my user
       ansible.builtin.set_fact:
-        remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+        remote_regular_user: "{{ ansible_user_id }}"
 
     - name: Get CPU Architecture
       ansible.builtin.set_fact:
@@ -25,6 +25,7 @@
       debug: msg="{{ version_id }}"
 
     - name: Install packages
+      become: true
       ansible.builtin.dnf:
         name:
           - git
@@ -50,7 +51,8 @@
           - bzip2
           - fd-find
           - autoconf
-          - zoxide
+          - '@kde-desktop'
+          - yakuake
         state: present
 
     - name: check if cargo is installed
@@ -79,9 +81,11 @@
         name: eza
 
     - name: Install zoxide
+      when:
       shell: cargo install --git https://github.com/ajeetdsouza/zoxide
 
     - name: Enable nushell copr repo
+      become: true
       community.general.copr:
         host: copr.fedorainfracloud.org
         state: enabled
@@ -89,16 +93,19 @@
         chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install nushell
+      become: true
       ansible.builtin.dnf:
         name: nushell
         state: present
 
     - name: Install DNF plugins core
+      become: true
       ansible.builtin.dnf:
         name: dnf-plugins-core
         state: present
 
     - name: Enable starship copr repo
+      become: true
       community.general.copr:
         host: copr.fedorainfracloud.org
         state: enabled
@@ -106,11 +113,13 @@
         chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install starship
+      become: true
       ansible.builtin.dnf:
         name: starship
         state: present
 
     - name: Enable lazygit copr repo
+      become: true
       community.general.copr:
         host: copr.fedorainfracloud.org
         state: enabled
@@ -118,17 +127,20 @@
         chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install lazygit
+      become: true
       ansible.builtin.dnf:
         name: lazygit
         state: present
 
     - name: Enable the RPMFusion Free repository
+      become: true
       dnf:
         name: "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
         state: present
       when: ansible_distribution == 'Fedora'
 
     - name: Enable the RPMFusion Nonfree repository
+      become: true
       dnf:
         name: "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
         state: present
@@ -140,11 +152,13 @@
     #     state: present
 
     - name: Enable Fedora Copr for better_fonts
+      become: true
       community.general.copr:
         name: hyperreal/better_fonts
         chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
     - name: Install better_fonts
+      become: true
       ansible.builtin.dnf:
         name:
           - fontconfig-font-replacements
@@ -152,6 +166,7 @@
         state: present
 
     - name: Add Vivaldi Repo
+      become: true
       ansible.builtin.yum_repository:
         name: vivaldi-stable
         description: Vivaldi Browser
@@ -161,11 +176,13 @@
         enabled: true
 
     - name: Import Vivaldi GPG Key
+      become: true
       ansible.builtin.rpm_key:
         key: https://repo.vivaldi.com/archive/linux_signing_key.pub
         state: present
 
     - name: Install Vivaldi
+      become: true
       ansible.builtin.dnf:
         name: vivaldi-stable
         state: present
@@ -195,84 +212,101 @@
         state: present
       when: ansible_architecture == "aarch64"
 
+    - name: Check if Zotero is downloaded
+      stat:
+        path: "/home/{{ remote_regular_user }}/zotero-6.0.30-2.aarch64.rpm"
+      register: zotero
 
     - name: Download Zotero aarch64 RPM
       ansible.builtin.get_url:
         url: https://flock2.s-ul.eu/cTT3co7U
-        dest: /home/flock/zotero-6.0.30-2.aarch64.rpm
+        dest: "/home/{{ remote_regular_user }}/zotero-6.0.30-2.aarch64.rpm"
         mode: '0775'
-      when: ansible_architecture == "aarch64"
+      when:
+        - ansible_architecture == "aarch64"
+        - zotero.stat.exists == "false"
 
     - name: Install Zotero aarch64 RPM
+      become: true
       ansible.builtin.dnf:
-        name: /home/flock/zotero-6.0.30-2.aarch64.rpm
+        name: "/home/{{ remote_regular_user }}/zotero-6.0.30-2.aarch64.rpm"
         state: present
-      when: ansible_architecture == "aarch64"
+      when:
+        - ansible_architecture == "aarch64"
+        - zotero.stat.exists == "false"
+
+    - name: check if Rose Pine cursor is installed
+      stat:
+        path: "/home/{{ remote_regular_user }}/.local/share/icons/BreezeX-RosePine-Linux"
+      register: cursor
 
     - name: Download Rose Pine Cursors
       ansible.builtin.get_url:
         url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePine-Linux.tar.xz
-        dest: /home/flock/Downloads/BreezeX-RosePine-Linux.tar.xz
+        dest: "/home/{{ remote_regular_user }}/Downloads/BreezeX-RosePine-Linux.tar.xz"
         mode: "0777"
-        owner: flock
+        owner: "{{ remote_regular_user }}"
+      when: cursor.stat.exists == "false"
 
     - name: Install Rose Pine Cursors
-      shell: tar -xvf /home/flock/Downloads/BreezeX-RosePine-Linux.tar.xz -C /home/flock/.local/share/icons
+      shell: "tar -xvf /home/{{ remote_regular_user }}/Downloads/BreezeX-RosePine-Linux.tar.xz -C /home/{{ remote_regular_user }}/.local/share/icons"
       ignore_errors: yes
+      when: cursor.stat.exists == "false"
 
     - name: Install SDDM Rose Pine Theme
+      become: true
       copy:
-        src: /home/flock/sddm-rose-pine
+        src: "/home/{{ remote_regular_user }}/sddm-rose-pine"
         dest: /usr/share/sddm/themes/
     # Used for GNOME, now not necessary
     # - name: Create themes directory
     #   ansible.builtin.file:
-    #     path: /home/flock/.themes/rose-pine
+    #     path: "/home/{{ remote_regular_user }}/.themes/rose-pine"
     #     state: directory
     #     mode: "0755"
-    #     owner: flock
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: Create icons directory
     #   ansible.builtin.file:
-    #     path: /home/flock/.icons/rose-pine-icons
+    #     path: "/home/{{ remote_regular_user }}/.icons/rose-pine-icons"
     #     state: directory
     #     mode: "0755"
-    #     owner: flock
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: Download Rose Pine GTK
     #   ansible.builtin.get_url:
-    #     url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/gtk3.tar.gz
-    #     dest: /home/flock/.themes/gtk3.tar.gz
+    #     url: "https://github.com/rose-pine/gtk/releases/download/v2.1.0/gtk3.tar.gz"
+    #     dest: "/home/{{ remote_regular_user }}/.themes/gtk3.tar.gz"
     #     mode: "0777"
-    #     owner: flock
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: Download Rose Pine Icons
     #   ansible.builtin.get_url:
-    #     url: https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-icons.tar.gz
-    #     dest: /home/flock/.icons/rose-pine-icons.tar.gz
+    #     url: "https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-icons.tar.gz"
+    #     dest: "/home/{{ remote_regular_user }}/.icons/rose-pine-icons.tar.gz"
     #     mode: "0777"
-    #     owner: flock
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: extract theme
     #   ansible.builtin.unarchive:
-    #     src: /home/flock/.themes/gtk3.tar.gz
-    #     dest: /home/flock/.themes/
-    #     owner: flock
+    #     src: "/home/{{ remote_regular_user }}/.themes/gtk3.tar.gz"
+    #     dest: "/home/{{ remote_regular_user }}/.themes/"
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: extract icons
     #   ansible.builtin.unarchive:
-    #     src: /home/flock/.icons/rose-pine-icons.tar.gz
-    #     dest: /home/flock/.themes/
-    #     owner: flock
+    #     src: "/home/{{ remote_regular_user }}/.icons/rose-pine-icons.tar.gz"
+    #     dest: "/home/{{ remote_regular_user }}/.themes/"
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: copy theme
     #   ansible.builtin.copy:
-    #     src: /home/flock/.themes/gtk3/rose-pine-gtk
-    #     dest: /home/flock/.themes/
-    #     owner: flock
+    #     src: "/home/{{ remote_regular_user }}/.themes/gtk3/rose-pine-gtk"
+    #     dest: "/home/{{ remote_regular_user }}/.themes/"
+    #     owner: "{{ remote_regular_user }}"
 
     # - name: copy icons
     #   ansible.builtin.copy:
-    #     src: /home/flock/.icons/icons/rose-pine-icons
-    #     dest: /home/flock/.icons/
-    #     owner: flock
+    #     src: "/home/{{ remote_regular_user }}/.icons/icons/rose-pine-icons"
+    #     dest: "/home/{{ remote_regular_user }}/.icons/"
+    #     owner: "{{ remote_regular_user }}"
