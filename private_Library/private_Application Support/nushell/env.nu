@@ -103,3 +103,27 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 $env.PATH = ($env.PATH | split row (char esep) | prepend '~/.local/bin') 
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/usr/local/bin') 
 $env.PATH = ($env.PATH | split row (char esep) | prepend '~/.cargo/bin') 
+# Starship config
+mkdir ~/.cache/starship
+starship init nu | save -f ~/.cache/starship/init.nu
+# zoxide config
+zoxide init nushell | str replace "-- $rest" "-- ...$rest" --all | save -f ~/.zoxide.nu # Broken for now
+$env.FZF_DEFAULT_OPTS = "
+	--color=fg:#908caa,bg:#191724,hl:#ebbcba
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+$env._ZO_FZF_OPTS = "
+    --scheme=path
+    --tiebreak=end,chunk,index
+    --bind=ctrl-z:ignore,btab:up,tab:down
+    --cycle
+    --keep-right
+    --border=sharp
+    --height=45%
+    --info=inline
+    --layout=reverse
+    --tabstop=1
+    --exit-0
+    --select-1"

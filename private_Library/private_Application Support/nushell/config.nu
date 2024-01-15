@@ -764,6 +764,7 @@ use ~/.cache/starship/init.nu
 # aliases
 alias doom = ~/.config/emacs/bin/doom
 alias in = brew install
+source ~/.zoxide.nu
 def dup [] {
     brew update
     brew outdated
@@ -783,7 +784,7 @@ alias grm = git remove
 alias em = emacsclient -c -a 'emacs'
 alias vim = nvim
 alias listpkg = brew list
-alias ll = exa -la
+alias ll = eza -la
 alias extract = unp
 alias python = python3
 alias pip = pip3
