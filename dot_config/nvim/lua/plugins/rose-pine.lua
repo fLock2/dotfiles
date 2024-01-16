@@ -7,10 +7,10 @@ return {
       variant = "main",
     },
   },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "rose-pine",
-    },
-  },
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "rose-pine",
+  --   },
+  -- },
 }

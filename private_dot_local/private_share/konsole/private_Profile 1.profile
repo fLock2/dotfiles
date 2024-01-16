@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=rose-pine
+ColorScheme=Catppuccin-Mocha
 
 [General]
 Command=/usr/bin/nu

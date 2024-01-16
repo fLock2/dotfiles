@@ -21,6 +21,10 @@
       ansible.builtin.set_fact:
         version_id: "{{ ansible_distribution_major_version }}"
 
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
     - name: Distribution major version
       debug: msg="{{ version_id }}"
 
@@ -51,7 +55,7 @@
           - bzip2
           - fd-find
           - autoconf
-          - '@kde-desktop'
+          - "@kde-desktop"
           - yakuake
         state: present
 
@@ -64,7 +68,7 @@
       when: cargo_exists is failed
       get_url:
         url: https://sh.rustup.rs
-        dest: /tmp/sh.rustup.rs
+        dest: /dotfiletemp/sh.rustup.rs
         mode: "0755"
         force: "yes"
       tags:
@@ -72,7 +76,7 @@
 
     - name: install rust/cargo
       when: cargo_exists is failed
-      shell: /tmp/sh.rustup.rs -y
+      shell: /dotfiletemp/sh.rustup.rs -y
       tags:
         - rust
 
@@ -117,6 +121,19 @@
       ansible.builtin.dnf:
         name: starship
         state: present
+
+    - name: Enable bottom copr repo
+      become: true
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: atim/bottom
+        chroot: "fedora-{{ version_id }}-{{ architecture }}"
+
+    - name: Install bottom
+      become: true
+      ansible.builtin.dnf:
+        name: bottom
 
     - name: Enable lazygit copr repo
       become: true
@@ -212,28 +229,42 @@
         state: present
       when: ansible_architecture == "aarch64"
 
-    - name: Check if Zotero is downloaded
-      stat:
-        path: "/home/{{ remote_regular_user }}/zotero-6.0.30-2.aarch64.rpm"
-      register: zotero
+    # - name: Check if Zotero is downloaded
+    #   stat:
+    #     path: "/home/{{ remote_regular_user }}/dotfiletemp/zotero-6.0.30-2.aarch64.rpm"
+    #   register: zotero
+    #
 
     - name: Download Zotero aarch64 RPM
       ansible.builtin.get_url:
         url: https://flock2.s-ul.eu/cTT3co7U
-        dest: "/home/{{ remote_regular_user }}/zotero-6.0.30-2.aarch64.rpm"
-        mode: '0775'
+        dest: "/home/{{ remote_regular_user }}/dotfiletemp/zotero-6.0.30-2.aarch64.rpm"
+        mode: "0775"
       when:
         - ansible_architecture == "aarch64"
-        - zotero.stat.exists == "false"
+        # - zotero.stat.exists == "false"
+        - "'zotero' not in ansible_facts.packages"
 
     - name: Install Zotero aarch64 RPM
       become: true
       ansible.builtin.dnf:
-        name: "/home/{{ remote_regular_user }}/zotero-6.0.30-2.aarch64.rpm"
+        name: "/home/{{ remote_regular_user }}/dotfiletemp/zotero-6.0.30-2.aarch64.rpm"
         state: present
       when:
         - ansible_architecture == "aarch64"
-        - zotero.stat.exists == "false"
+        # - zotero.stat.exists == "false"
+        - "'zotero' not in ansible_facts.packages"
+
+    - name: Download ww (window focus manager)
+      ansible.builtin.git:
+        repo: https://github.com/academo/ww-run-raise
+        dest: "/home/{{ remote_regular_user }}/dotfiletemp/ww-run-raise"
+
+    - name: Install ww
+      ansible.builtin.copy:
+        src: "/home/{{ remote_regular_user }}/dotfiletemp/ww-run-raise/ww"
+        dest: "/home/{{ remote_regular_user }}/.local/bin/"
+        mode: "0755"
 
     - name: check if Rose Pine cursor is installed
       stat:
@@ -243,21 +274,70 @@
     - name: Download Rose Pine Cursors
       ansible.builtin.get_url:
         url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePine-Linux.tar.xz
-        dest: "/home/{{ remote_regular_user }}/Downloads/BreezeX-RosePine-Linux.tar.xz"
+        dest: "/home/{{ remote_regular_user }}/dotfiletemp/BreezeX-RosePine-Linux.tar.xz"
         mode: "0777"
         owner: "{{ remote_regular_user }}"
       when: cursor.stat.exists == "false"
 
     - name: Install Rose Pine Cursors
-      shell: "tar -xvf /home/{{ remote_regular_user }}/Downloads/BreezeX-RosePine-Linux.tar.xz -C /home/{{ remote_regular_user }}/.local/share/icons"
+      shell: "tar -xvf /home/{{ remote_regular_user }}/dotfiletemp/BreezeX-RosePine-Linux.tar.xz -C /home/{{ remote_regular_user }}/.local/share/icons"
       ignore_errors: yes
       when: cursor.stat.exists == "false"
+
+    - name: Check if SDDM Rose Pine is installed
+      stat:
+        path: /usr/share/sddm/themes/sddm-rose-pine
+      register: rosesddm
+
+    - name: Download SDDM Rose Pine theme
+      ansible.builtin.git:
+        repo: https://github.com/lwndhrst/sddm-rose-pine
+        dest: "/home/{{ remote_regular_user }}/dotfiletemp/sddm-rose-pine"
+      when:
+        - rosesddm.stat.exists == "false"
 
     - name: Install SDDM Rose Pine Theme
       become: true
       copy:
-        src: "/home/{{ remote_regular_user }}/sddm-rose-pine"
+        src: "/home/{{ remote_regular_user }}/dotfiletemp/sddm-rose-pine"
         dest: /usr/share/sddm/themes/
+      when:
+        - rosesddm.stat.exists == "false"
+
+    - name: Check if SDDM Catppuccin is installed
+      stat:
+        path: /usr/share/sddm/themes/catppuccin-mocha
+      register: catsddm
+
+    - name: Download SDDM Catppuccin theme
+      ansible.builtin.git:
+        repo: https://github.com/catppuccin/sddm
+        dest: "/home/{{ remote_regular_user }}/dotfiletemp/catppuccin-sddm"
+      when:
+        - catsddm.stat.exists == "false"
+
+    - name: Install SDDM Catppuccin Theme
+      become: true
+      copy:
+        src: "/home/{{ remote_regular_user }}/dotfiletemp/catppuccin-sddm/src/catppuccin-mocha"
+        dest: /usr/share/sddm/themes/
+      when:
+        - catsddm.stat.exists == "false"
+
+    - name: Download Konsole Catppuccin theme
+      ansible.builtin.git:
+        repo: https://github.com/catppuccin/konsole
+        dest: "/home/{{ remote_regular_user }}/dotfiletemp/catppuccin-konsole"
+
+    - name: Install Konsole Catppuccin Theme
+      copy:
+        src: "/home/{{ remote_regular_user }}/dotfiletemp/catppuccin-konsole/Catppuccin-Mocha.colorscheme"
+        dest: "/home/{{ remote_regular_user }}/.local/share/konsole/"
+
+    - name: Clean tempfile directory
+      ansible.builtin.file:
+        path: "/home/{{ remote_regular_user }}/dotfiletemp"
+        state: absent
     # Used for GNOME, now not necessary
     # - name: Create themes directory
     #   ansible.builtin.file:
