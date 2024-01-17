@@ -84,9 +84,14 @@
       community.general.cargo:
         name: eza
 
+    - name: check if zoxide is installed
+      shell: command -v zoxide
+      register: zoxide_exists
+      ignore_errors: yes
+
     - name: Install zoxide
-      when:
       shell: cargo install --git https://github.com/ajeetdsouza/zoxide
+      when: zoxide_exists is failed
 
     - name: Enable nushell copr repo
       become: true
@@ -242,7 +247,7 @@
         mode: "0775"
       when:
         - ansible_architecture == "aarch64"
-        # - zotero.stat.exists == "false"
+        # - zotero.stat.exists == false
         - "'zotero' not in ansible_facts.packages"
 
     - name: Install Zotero aarch64 RPM
@@ -252,7 +257,7 @@
         state: present
       when:
         - ansible_architecture == "aarch64"
-        # - zotero.stat.exists == "false"
+        # - zotero.stat.exists == false
         - "'zotero' not in ansible_facts.packages"
 
     - name: Download ww (window focus manager)
@@ -266,6 +271,32 @@
         dest: "/home/{{ remote_regular_user }}/.local/bin/"
         mode: "0755"
 
+    - name: Check if Spacemacs is installed
+      stat:
+        path: "/home/{{ remote_regular_user }}/.emacs.d/spacemacs.mk"
+      register: spacemacs
+
+    - name: Check if emacs.d is present
+      stat:
+        path: "/home/{{ remote_regular_user }}/.emacs.d"
+      register: emacsd
+
+    - name: backup old .emacs.d
+      ansible.builtin.copy:
+        src: "/home/{{ remote_regular_user }}/dotfiletemp/ww-run-raise/ww"
+        dest: "/home/{{ remote_regular_user }}/.local/bin/"
+        mode: "0755"
+      when:
+        - spacemacs.stat.exists == false
+        - emacsd.stat.exists == true
+
+    - name: download Spacemacs
+      ansible.builtin.git:
+        repo: https://github.com/syl20bnr/spacemacs
+        dest: "/home/{{ remote_regular_user }}/.emacs.d"
+      when:
+        - spacemacs.stat.exists == false
+
     - name: check if Rose Pine cursor is installed
       stat:
         path: "/home/{{ remote_regular_user }}/.local/share/icons/BreezeX-RosePine-Linux"
@@ -277,12 +308,12 @@
         dest: "/home/{{ remote_regular_user }}/dotfiletemp/BreezeX-RosePine-Linux.tar.xz"
         mode: "0777"
         owner: "{{ remote_regular_user }}"
-      when: cursor.stat.exists == "false"
+      when: cursor.stat.exists == false
 
     - name: Install Rose Pine Cursors
       shell: "tar -xvf /home/{{ remote_regular_user }}/dotfiletemp/BreezeX-RosePine-Linux.tar.xz -C /home/{{ remote_regular_user }}/.local/share/icons"
       ignore_errors: yes
-      when: cursor.stat.exists == "false"
+      when: cursor.stat.exists == false
 
     - name: Check if SDDM Rose Pine is installed
       stat:
@@ -294,7 +325,7 @@
         repo: https://github.com/lwndhrst/sddm-rose-pine
         dest: "/home/{{ remote_regular_user }}/dotfiletemp/sddm-rose-pine"
       when:
-        - rosesddm.stat.exists == "false"
+        - rosesddm.stat.exists == false
 
     - name: Install SDDM Rose Pine Theme
       become: true
@@ -302,7 +333,7 @@
         src: "/home/{{ remote_regular_user }}/dotfiletemp/sddm-rose-pine"
         dest: /usr/share/sddm/themes/
       when:
-        - rosesddm.stat.exists == "false"
+        - rosesddm.stat.exists == false
 
     - name: Check if SDDM Catppuccin is installed
       stat:
@@ -314,7 +345,7 @@
         repo: https://github.com/catppuccin/sddm
         dest: "/home/{{ remote_regular_user }}/dotfiletemp/catppuccin-sddm"
       when:
-        - catsddm.stat.exists == "false"
+        - catsddm.stat.exists == false
 
     - name: Install SDDM Catppuccin Theme
       become: true
@@ -322,7 +353,7 @@
         src: "/home/{{ remote_regular_user }}/dotfiletemp/catppuccin-sddm/src/catppuccin-mocha"
         dest: /usr/share/sddm/themes/
       when:
-        - catsddm.stat.exists == "false"
+        - catsddm.stat.exists == false
 
     - name: Download Konsole Catppuccin theme
       ansible.builtin.git:
