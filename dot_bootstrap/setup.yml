@@ -13,6 +13,10 @@
       ansible.builtin.set_fact:
         remote_regular_user: "{{ansible_user_id}}"
 
+    - name: Add emacs-plus tap
+      community.general.homebrew_tap:
+        name: d12frosted/emacs-plus
+
     - name: install homebrew formulae packages
       become: false
       homebrew:
@@ -24,6 +28,7 @@
           - fzf
           - gcc
           - git
+          - jq
           - lazygit
           - libvterm
           - make
@@ -34,6 +39,7 @@
           - ripgrep
           - starship
           - unzip
+          - emacs-plus
         update_homebrew: yes
         state: present
 
@@ -44,7 +50,6 @@
           - arc
           - cheatsheet
           - discord
-          - emacs
           - firefox
           - hiddenbar
           - iterm2
@@ -57,6 +62,49 @@
           - shottr
           - zotero
         state: present
+
+    - name: Check if emacs-plus alias is created
+      stat:
+        path: "/Applications/Emacs.app"
+      register: emacsplus
+
+    - name: Create alias for emacs-plus in Applications folder
+      shell: osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/Cellar/emacs-plus@29/29.1/Emacs.app" at POSIX file "/Applications"'
+      when:
+        - emacsplus.stat.exists == false
+
+    - name: Check if Spacemacs is installed
+      stat:
+        path: "/Users/{{ remote_regular_user }}/.emacs.d/spacemacs.mk"
+      register: spacemacs
+
+    - name: Check if emacs.d is present
+      stat:
+        path: "/Users/{{ remote_regular_user }}/.emacs.d"
+      register: emacsd
+
+    - name: backup old .emacs.d
+      ansible.builtin.copy:
+        src: "/Users/{{ remote_regular_user }}/.emacs.d"
+        dest: "/Users/{{ remote_regular_user }}/.emacs.d.bak"
+        mode: "0755"
+      when:
+        - spacemacs.stat.exists == false
+        - emacsd.stat.exists == true
+
+    - name: remove old .emacs.d
+      ansible.builtin.file:
+        path: "/Users/{{ remote_regular_user }}/.emacs.d"
+        state: absent
+      when:
+        - spacemacs.stat.exists == false
+
+    - name: download Spacemacs
+      ansible.builtin.git:
+        repo: https://github.com/syl20bnr/spacemacs
+        dest: "/Users/{{ remote_regular_user }}/.emacs.d"
+      when:
+        - spacemacs.stat.exists == false
 
     - name: check if cargo is installed
       shell: command -v cargo
