@@ -283,8 +283,8 @@
 
     - name: backup old .emacs.d
       ansible.builtin.copy:
-        src: "/home/{{ remote_regular_user }}/dotfiletemp/ww-run-raise/ww"
-        dest: "/home/{{ remote_regular_user }}/.local/bin/"
+        src: "/home/{{ remote_regular_user }}/.emacs.d"
+        dest: "/home/{{ remote_regular_user }}/.emacs.d.bak"
         mode: "0755"
       when:
         - spacemacs.stat.exists == false
