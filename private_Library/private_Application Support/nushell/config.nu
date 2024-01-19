@@ -770,7 +770,7 @@ def dup [] {
     brew outdated
     brew upgrade
     brew cleanup
-    doom upgrade
+    #doom upgrade
 }
 alias pup = brew update
 alias rp = brew uninstall
