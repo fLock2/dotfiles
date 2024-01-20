@@ -764,14 +764,14 @@ use ~/.cache/starship/init.nu
 source ~/.zoxide.nu
 # aliases
 alias doom = ~/.config/emacs/bin/doom
-alias in = sudo dnf install
+alias in = sudo dnf5 install
 def dup [] {
-    sudo dnf distro-sync
+    sudo dnf5 distro-sync
     flatpak update
     #nix-env --upgrade
-    doom upgrade
+    #doom upgrade
 }
-alias rp = sudo dnf remove
+alias rp = sudo dnf5 remove
 alias fuck = sudo !!
 alias gcl = git clone
 alias gcm = git commit -m
@@ -781,7 +781,7 @@ alias gad = git add
 alias grm = git remove
 alias em = emacsclient -c -a 'emacs'
 alias vim = nvim
-alias listpkg = dnf list installed
+alias listpkg = dnf5 list --installed
 alias ll = eza -la
 alias extract = unp
 alias python = python3

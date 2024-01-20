@@ -33,7 +33,8 @@
       ansible.builtin.dnf:
         name:
           - git
-          - btop
+          - dnf5
+          - dnf5-plugins
           - neovim
           - neofetch
           - emacs
