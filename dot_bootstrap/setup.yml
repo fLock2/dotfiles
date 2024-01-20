@@ -154,6 +154,19 @@
         name: lazygit
         state: present
 
+    - name: Enable wezterm copr repo
+      become: true
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: wezfurlong/wezterm-nightly
+        chroot: "fedora-{{ version_id }}-{{ architecture }}"
+
+    - name: Install wezterm
+      become: true
+      ansible.builtin.dnf:
+        name: wezterm
+
     - name: Enable the RPMFusion Free repository
       become: true
       dnf:
