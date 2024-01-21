@@ -32,11 +32,11 @@
       become: true
       ansible.builtin.dnf:
         name:
+          - zsh
           - git
           - dnf5
           - dnf5-plugins
           - neovim
-          - neofetch
           - emacs
           - nodejs
           - firefox
@@ -46,7 +46,6 @@
           - ripgrep
           - fd-find
           - unzip
-          - zsh
           - fzf
           - bat
           - tmux
@@ -84,6 +83,10 @@
     - name: Install eza
       community.general.cargo:
         name: eza
+
+    - name: Install macchina
+      community.general.cargo:
+        name: macchina
 
     - name: check if zoxide is installed
       shell: command -v zoxide
@@ -154,19 +157,6 @@
       ansible.builtin.dnf:
         name: lazygit
         state: present
-
-    - name: Enable wezterm copr repo
-      become: true
-      community.general.copr:
-        host: copr.fedorainfracloud.org
-        state: enabled
-        name: wezfurlong/wezterm-nightly
-        chroot: "fedora-{{ version_id }}-{{ architecture }}"
-
-    - name: Install wezterm
-      become: true
-      ansible.builtin.dnf:
-        name: wezterm
 
     - name: Enable the RPMFusion Free repository
       become: true
@@ -273,17 +263,6 @@
         - ansible_architecture == "aarch64"
         # - zotero.stat.exists == false
         - "'zotero' not in ansible_facts.packages"
-
-    - name: Download ww (window focus manager)
-      ansible.builtin.git:
-        repo: https://github.com/academo/ww-run-raise
-        dest: "/home/{{ remote_regular_user }}/dotfiletemp/ww-run-raise"
-
-    - name: Install ww
-      ansible.builtin.copy:
-        src: "/home/{{ remote_regular_user }}/dotfiletemp/ww-run-raise/ww"
-        dest: "/home/{{ remote_regular_user }}/.local/bin/"
-        mode: "0755"
 
     - name: Check if Spacemacs is installed
       stat:

@@ -32,7 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -42,7 +42,6 @@ This function should only modify configuration layer settings."
      better-defaults
      chezmoi
      emacs-lisp
-     fzf
      git
      dap
      helm
@@ -72,7 +71,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       (catppuccin-theme)
                                       (autothemer)
-                                      (exec-path-from-shell)
                                       (rose-pine-theme :location (recipe
                                                                 :fetcher github
                                                                 :repo "thongpv87/rose-pine-emacs"))
@@ -602,6 +600,9 @@ before packages are loaded."
 )
 (setq shell-file-name "zsh")
 (setq lsp-enable-links nil)
+
+;; make opening a terminal not asinine
+(spacemacs/set-leader-keys "ot" 'spacemacs/shell-pop-multivterm)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
