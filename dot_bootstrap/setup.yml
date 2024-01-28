@@ -40,20 +40,13 @@
           - emacs
           - nodejs
           - firefox
-          - ulauncher
-          - gnome-tweaks
           - gcc
-          - ripgrep
-          - fd-find
           - unzip
-          - fzf
-          - bat
           - tmux
           - make
           - cmake
           - patch
           - bzip2
-          - fd-find
           - autoconf
           - "@kde-desktop"
           - yakuake
@@ -80,22 +73,18 @@
       tags:
         - rust
 
-    - name: Install eza
-      community.general.cargo:
-        name: eza
+    # - name: Install eza
+    #   community.general.cargo:
+    #     name: eza
 
-    - name: Install macchina
-      community.general.cargo:
-        name: macchina
-
-    - name: check if zoxide is installed
-      shell: command -v zoxide
-      register: zoxide_exists
-      ignore_errors: yes
-
-    - name: Install zoxide
-      shell: cargo install --git https://github.com/ajeetdsouza/zoxide
-      when: zoxide_exists is failed
+    # - name: check if zoxide is installed
+    #   shell: command -v zoxide
+    #   register: zoxide_exists
+    #   ignore_errors: yes
+    #
+    # - name: Install zoxide
+    #   shell: cargo install --git https://github.com/ajeetdsouza/zoxide
+    #   when: zoxide_exists is failed
 
     - name: Enable nushell copr repo
       become: true
@@ -117,46 +106,46 @@
         name: dnf-plugins-core
         state: present
 
-    - name: Enable starship copr repo
-      become: true
-      community.general.copr:
-        host: copr.fedorainfracloud.org
-        state: enabled
-        name: atim/starship
-        chroot: "fedora-{{ version_id }}-{{ architecture }}"
+    # - name: Enable starship copr repo
+    #   become: true
+    #   community.general.copr:
+    #     host: copr.fedorainfracloud.org
+    #     state: enabled
+    #     name: atim/starship
+    #     chroot: "fedora-{{ version_id }}-{{ architecture }}"
+    #
+    # - name: Install starship
+    #   become: true
+    #   ansible.builtin.dnf:
+    #     name: starship
+    #     state: present
 
-    - name: Install starship
-      become: true
-      ansible.builtin.dnf:
-        name: starship
-        state: present
+    # - name: Enable bottom copr repo
+    #   become: true
+    #   community.general.copr:
+    #     host: copr.fedorainfracloud.org
+    #     state: enabled
+    #     name: atim/bottom
+    #     chroot: "fedora-{{ version_id }}-{{ architecture }}"
+    #
+    # - name: Install bottom
+    #   become: true
+    #   ansible.builtin.dnf:
+    #     name: bottom
 
-    - name: Enable bottom copr repo
-      become: true
-      community.general.copr:
-        host: copr.fedorainfracloud.org
-        state: enabled
-        name: atim/bottom
-        chroot: "fedora-{{ version_id }}-{{ architecture }}"
-
-    - name: Install bottom
-      become: true
-      ansible.builtin.dnf:
-        name: bottom
-
-    - name: Enable lazygit copr repo
-      become: true
-      community.general.copr:
-        host: copr.fedorainfracloud.org
-        state: enabled
-        name: atim/lazygit
-        chroot: "fedora-{{ version_id }}-{{ architecture }}"
-
-    - name: Install lazygit
-      become: true
-      ansible.builtin.dnf:
-        name: lazygit
-        state: present
+    # - name: Enable lazygit copr repo
+    #   become: true
+    #   community.general.copr:
+    #     host: copr.fedorainfracloud.org
+    #     state: enabled
+    #     name: atim/lazygit
+    #     chroot: "fedora-{{ version_id }}-{{ architecture }}"
+    #
+    # - name: Install lazygit
+    #   become: true
+    #   ansible.builtin.dnf:
+    #     name: lazygit
+    #     state: present
 
     - name: Enable the RPMFusion Free repository
       become: true

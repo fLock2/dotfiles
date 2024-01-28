@@ -768,7 +768,7 @@ alias in = sudo dnf5 install
 def dup [] {
     sudo dnf5 distro-sync
     flatpak update
-    #nix-env --upgrade
+    nix-env -u
     #doom upgrade
 }
 alias rp = sudo dnf5 remove
