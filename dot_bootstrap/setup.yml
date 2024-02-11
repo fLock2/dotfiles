@@ -17,6 +17,10 @@
       community.general.homebrew_tap:
         name: d12frosted/emacs-plus
 
+    - name: Add yabai tap
+      community.general.homebrew_tap:
+        name: koekeishiya/formulae
+
     - name: install homebrew formulae packages
       become: false
       homebrew:
@@ -40,6 +44,8 @@
           - starship
           - unzip
           - emacs-plus
+          - skhd
+          - yabai
         update_homebrew: yes
         state: present
 
@@ -70,7 +76,7 @@
       register: emacsplus
 
     - name: Create alias for emacs-plus in Applications folder
-      shell: osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/Cellar/emacs-plus@29/29.1/Emacs.app" at POSIX file "/Applications"'
+      shell: osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/Cellar/emacs-plus@29/29.2/Emacs.app" at POSIX file "/Applications"'
       when:
         - emacsplus.stat.exists == false
 
