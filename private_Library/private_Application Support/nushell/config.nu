@@ -769,6 +769,7 @@ def dup [] {
     brew update
     brew outdated
     brew upgrade
+    brew upgrade --cask
     brew cleanup
     #doom upgrade
 }
