@@ -44,14 +44,22 @@ yabai -m config --space 1 layout float
 
 # window locations
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Raycast Settings$" manage=off
+yabai -m rule --add app="Exam4" manage=off
 yabai -m rule --add app="^iTerm2$" manage=off
-yabai -m rule --add app="^Finder$" manage=off
-yabai -m rule --add app="Arc" space=2
+# yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="Zotero" manage=off
+yabai -m rule --add "Zoom Workspace" space=1 manage=off
+yabai -m rule --add app="Arc" title="^$" space=2 mouse_follows_focus=off
+yabai -m rule --add app="Safari" space=2
 yabai -m rule --add app="Obsidian" space=3
 yabai -m rule --add app="Acrobat" space=4
 yabai -m rule --add app="^Emacs$" space=5
 yabai -m rule --add app="Word" space=5
 yabai -m rule --add app="Feishin" space=6
-yabai -m rule --add app="Zotero" space=7
+yabai -m rule --add app="^Calendar$" space=7
+yabai -m rule --add app="^Discord$" space=7
+yabai -m rule --add app="^Visual Studio Code$" space=8
+#yabai -m rule --add app="Zotero" space=7
 yabai -m rule --add app="Mail" space=9
 echo "yabai configuration loaded.."

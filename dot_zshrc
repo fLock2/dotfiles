@@ -1,9 +1,11 @@
 source ~/.bash_profile
 #STARSHIP
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+source <(fzf --zsh)
 
 alias in="brew install"
-alias dup="brew update && brew outdated && brew upgrade && brew cleanup"
+alias dup="brew update && brew outdated && brew upgrade && brew upgrade --cask && brew cleanup"
 alias pup="brew update"
 alias rp="brew uninstall"
 #alias cleancache="sudo pacman -Scc && sudo powerpill -Scc && paru -Scc"
@@ -19,11 +21,12 @@ alias em="emacsclient -c -a 'emacs'"
 alias vim="nvim"
 #alias listpkg="comm -23 <(paru -Qqett | sort) <(paru -Qqg base -g base-devel | sort | uniq)"
 alias listpkg="brew list"
-alias ls="eza -la"
+alias ls="eza -l"
+alias ll="eza -la"
 alias doom="~/.config/emacs/bin/doom"
 alias extract="unp"
 alias python="python3"
-
+alias ide_swift="zellij --layout ~/.config/zellij/layouts/swift.kdl"
 
 # Aliases for archives
 alias mktar='tar -cvf'
@@ -61,8 +64,10 @@ alias countfiles="for t in files links directories; do echo \`find . -type \${t:
 #}
 
 # Created by `pipx` on 2021-11-18 15:50:03
-export PATH="$PATH:/home/flock/.local/bin"
-
+export PATH="$PATH:/Users/flock/.local/bin"
+export PATH=$PATH:/nix/var/nix/profiles/default/bin/
+export PATH=$PATH:/run/current-system/sw/bin
+export EDITOR=hx
 [ -f "/home/flock/.ghcup/env" ] && source "/home/flock/.ghcup/env" # ghcup-env
 
 if [ -e /home/flock/.nix-profile/etc/profile.d/nix.sh ]; then . /home/flock/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
