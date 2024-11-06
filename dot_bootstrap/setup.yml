@@ -13,9 +13,9 @@
       ansible.builtin.set_fact:
         remote_regular_user: "{{ansible_user_id}}"
 
-    - name: Add emacs-plus tap
-      community.general.homebrew_tap:
-        name: d12frosted/emacs-plus
+    # - name: Add emacs-plus tap
+    #   community.general.homebrew_tap:
+    #     name: d12frosted/emacs-plus
 
     - name: Add yabai tap
       community.general.homebrew_tap:
@@ -32,8 +32,9 @@
           - fzf
           - gcc
           - git
+          - helix
           - jq
-          - lazygit
+          - gitui
           - libvterm
           - make
           - mas
@@ -43,9 +44,10 @@
           - ripgrep
           - starship
           - unzip
-          - emacs-plus
           - skhd
           - yabai
+          - zellij
+          - zoxide
         update_homebrew: yes
         state: present
 
@@ -53,10 +55,9 @@
       become: false
       homebrew_cask:
         name:
-          - arc
+          # - arc
           - cheatsheet
           - discord
-          - firefox
           - hiddenbar
           - iterm2
           - latest
@@ -65,53 +66,55 @@
           - notion
           - obsidian
           - raycast
-          - rectangle
+          # - rectangle
           - shottr
+          - wezterm
+          - zen-browser
           - zotero
         state: present
 
-    - name: Check if emacs-plus alias is created
-      stat:
-        path: "/Applications/Emacs.app"
-      register: emacsplus
+    # - name: Check if emacs-plus alias is created
+    #   stat:
+    #     path: "/Applications/Emacs.app"
+    #   register: emacsplus
 
-    - name: Create alias for emacs-plus in Applications folder
-      shell: osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/Cellar/emacs-plus@29/29.2/Emacs.app" at POSIX file "/Applications"'
-      when:
-        - emacsplus.stat.exists == false
+    # - name: Create alias for emacs-plus in Applications folder
+    #   shell: osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/Cellar/emacs-plus@29/29.2/Emacs.app" at POSIX file "/Applications"'
+    #   when:
+    #     - emacsplus.stat.exists == false
 
-    - name: Check if Spacemacs is installed
-      stat:
-        path: "/Users/{{ remote_regular_user }}/.emacs.d/spacemacs.mk"
-      register: spacemacs
+    # - name: Check if Spacemacs is installed
+    #   stat:
+    #     path: "/Users/{{ remote_regular_user }}/.emacs.d/spacemacs.mk"
+    #   register: spacemacs
 
-    - name: Check if emacs.d is present
-      stat:
-        path: "/Users/{{ remote_regular_user }}/.emacs.d"
-      register: emacsd
+    # - name: Check if emacs.d is present
+    #   stat:
+    #     path: "/Users/{{ remote_regular_user }}/.emacs.d"
+    #   register: emacsd
 
-    - name: backup old .emacs.d
-      ansible.builtin.copy:
-        src: "/Users/{{ remote_regular_user }}/.emacs.d"
-        dest: "/Users/{{ remote_regular_user }}/.emacs.d.bak"
-        mode: "0755"
-      when:
-        - spacemacs.stat.exists == false
-        - emacsd.stat.exists == true
+    # - name: backup old .emacs.d
+    #   ansible.builtin.copy:
+    #     src: "/Users/{{ remote_regular_user }}/.emacs.d"
+    #     dest: "/Users/{{ remote_regular_user }}/.emacs.d.bak"
+    #     mode: "0755"
+    #   when:
+    #     - spacemacs.stat.exists == false
+    #     - emacsd.stat.exists == true
 
-    - name: remove old .emacs.d
-      ansible.builtin.file:
-        path: "/Users/{{ remote_regular_user }}/.emacs.d"
-        state: absent
-      when:
-        - spacemacs.stat.exists == false
+    # - name: remove old .emacs.d
+    #   ansible.builtin.file:
+    #     path: "/Users/{{ remote_regular_user }}/.emacs.d"
+    #     state: absent
+    #   when:
+    #     - spacemacs.stat.exists == false
 
-    - name: download Spacemacs
-      ansible.builtin.git:
-        repo: https://github.com/syl20bnr/spacemacs
-        dest: "/Users/{{ remote_regular_user }}/.emacs.d"
-      when:
-        - spacemacs.stat.exists == false
+    # - name: download Spacemacs
+    #   ansible.builtin.git:
+    #     repo: https://github.com/syl20bnr/spacemacs
+    #     dest: "/Users/{{ remote_regular_user }}/.emacs.d"
+    #   when:
+    #     - spacemacs.stat.exists == false
 
     - name: check if cargo is installed
       shell: command -v cargo
@@ -134,9 +137,9 @@
       tags:
         - rust
 
-    - name: Install zoxide
-      when:
-      shell: cargo install --git https://github.com/ajeetdsouza/zoxide
+    # - name: Install zoxide
+    #   when:
+    #   shell: cargo install --git https://github.com/ajeetdsouza/zoxide
 
     - name: install app store programs
       community.general.mas:
