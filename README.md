@@ -7,7 +7,6 @@ This repo includes theming from other projects, so the download size will be big
 ## How to run
 
 ```shell
-export GITHUB_USERNAME=fLock2
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply fLock2
 ```
 
