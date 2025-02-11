@@ -51,6 +51,7 @@ yabai -m rule --add app="^iTerm2$" manage=off
 yabai -m rule --add app="Zotero" manage=off
 yabai -m rule --add "Zoom Workspace" space=1 manage=off
 yabai -m rule --add app="Arc" title="^$" space=2 mouse_follows_focus=off
+yabai -m rule --add app="Zen Browser" space=2
 yabai -m rule --add app="Safari" space=2
 yabai -m rule --add app="Obsidian" space=3
 yabai -m rule --add app="Acrobat" space=4
