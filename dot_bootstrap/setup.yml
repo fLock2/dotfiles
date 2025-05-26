@@ -33,6 +33,7 @@
       ansible.builtin.dnf:
         name:
           - zsh
+          - fish
           - git
           - dnf5
           - dnf5-plugins
@@ -86,19 +87,19 @@
     #   shell: cargo install --git https://github.com/ajeetdsouza/zoxide
     #   when: zoxide_exists is failed
 
-    - name: Enable nushell copr repo
-      become: true
-      community.general.copr:
-        host: copr.fedorainfracloud.org
-        state: enabled
-        name: atim/nushell
-        chroot: "fedora-{{ version_id }}-{{ architecture }}"
+    # - name: Enable nushell copr repo
+    #   become: true
+    #   community.general.copr:
+    #     host: copr.fedorainfracloud.org
+    #     state: enabled
+    #     name: atim/nushell
+    #     chroot: "fedora-{{ version_id }}-{{ architecture }}"
 
-    - name: Install nushell
-      become: true
-      ansible.builtin.dnf:
-        name: nushell
-        state: present
+    # - name: Install nushell
+    #   become: true
+    #   ansible.builtin.dnf:
+    #     name: nushell
+    #     state: present
 
     - name: Install DNF plugins core
       become: true
