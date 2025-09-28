@@ -27,6 +27,7 @@ alias doom="~/.config/emacs/bin/doom"
 alias extract="unp"
 alias python="python3"
 alias ide_swift="zellij --layout ~/.config/zellij/layouts/swift.kdl"
+alias unquarantine="xattr -d com.apple.quarantine"
 
 # Aliases for archives
 alias mktar='tar -cvf'
