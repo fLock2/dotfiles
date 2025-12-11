@@ -28,6 +28,7 @@ alias extract="unp"
 alias python="python3"
 alias ide_swift="zellij --layout ~/.config/zellij/layouts/swift.kdl"
 alias unquarantine="xattr -d com.apple.quarantine"
+alias fix_gestures="sudo killall hidd"
 
 # Aliases for archives
 alias mktar='tar -cvf'
