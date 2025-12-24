@@ -114,3 +114,6 @@ PaperWM.swipe_fingers = 3
 -- increase this number to make windows move farther when swiping
 PaperWM.swipe_gain = 1.0
 PaperWM:start()
+WarpMouse = hs.loadSpoon("WarpMouse")
+WarpMouse.margin = 8  -- optionally set how far past a screen edge the mouse should warp, default is 2 pixels
+WarpMouse:start()
