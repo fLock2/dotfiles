@@ -79,8 +79,8 @@ PaperWM:bindHotkeys({
       -- focus_window_9 = {{"cmd", "shift"}, "9"},
 
       -- switch to a new Mission Control space
-      switch_space_l = {{"cmd", "shift"}, ","},
-      switch_space_r = {{"cmd", "shift"}, "."},
+      switch_space_l = {{"ctrl", "cmd", "shift"}, "h"},
+      switch_space_r = {{"ctrl", "cmd", "shift"}, "l"},
       switch_space_1 = {{"cmd", "shift"}, "1"},
       switch_space_2 = {{"cmd", "shift"}, "2"},
       switch_space_3 = {{"cmd", "shift"}, "3"},
@@ -105,6 +105,7 @@ PaperWM:bindHotkeys({
 -- })
 PaperWM.window_gap  =  { top = 5, bottom = 5, left = 10, right = 10 }
 PaperWM.window_filter:rejectApp("iTerm2")
+PaperWM.window_filter:rejectApp("Stickies")
 PaperWM.window_filter:rejectApp("Exam4")
 -- PaperWM.window_filter:rejectApp("iTerm")
 
