@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=catppuccin-mocha
+ColorScheme=Catppuccin-Mocha
 
 [General]
 Command=/bin/fish
