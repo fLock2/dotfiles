@@ -15,7 +15,7 @@ input {
             // For example:
             layout "us(mac),de(us)"
             // variant ""
-            options "grp:shifts_toggle,compose:ralt,ctrl:nocaps,ctrl:swap_lwin_lctl"
+            options "grp:shifts_toggle,compose:ralt,ctrl:nocaps"
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
