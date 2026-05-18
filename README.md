@@ -7,6 +7,6 @@ This repo includes theming from other projects, so the download size will be big
 ## How to run
 
 ```shell
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply fLock2
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --branch asahi --apply fLock2
 ```
 
