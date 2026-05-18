@@ -79,7 +79,7 @@ input {
 output "eDP-1"{
 	mode "3024x1890@119.96"
 
-	scale 1
+	scale 2
 
 	transform "normal"
 
