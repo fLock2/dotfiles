@@ -3,6 +3,8 @@ if status is-interactive
     starship init fish | source
     zoxide init fish | source
 
+    export EDITOR=hx
+
     # Aliases
     #alias in="paru -S"
     alias in="sudo dnf5 install"

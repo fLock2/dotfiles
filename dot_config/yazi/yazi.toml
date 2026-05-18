@@ -1,0 +1,21 @@
+[opener]
+edit = [{ run = 'hx "$@"', block = true }]
+# extract = [
+# 	{ run = 'ouch d -y %*', desc = "Extract here with ouch", for = "windows" },
+# 	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+# ]
+[[plugin.prepend_previewers]]
+mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}"
+run  = "ouch"
+
+[[plugin.prepend_fetchers]]
+url   = "local://*"
+run   = "mime-ext.local"
+prio  = "high"
+group = "mime"
+
+[[plugin.prepend_fetchers]]
+url   = "remote://*"
+run   = "mime-ext.remote"
+prio  = "high"
+group = "mime"

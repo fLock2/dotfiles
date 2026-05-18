@@ -59,8 +59,8 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Default PS1 prompt if not using Starship
 # export PS1="\[$(tput bold)\]\[$(tput setaf 4)\]╭─\[$(tput setaf 2)\u@\h \[$(tput setaf 4)\]\w \$(__git_prompt)\[$(tput setaf 4)\]\n╰>\[$(tput sgr0)\]"
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="hx"
+export VISUAL="hx"
 export PATH=$PATH:~/.local/bin
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 export BROWSER="firefox"
@@ -74,11 +74,12 @@ export XKB_DEFAULT_LAYOUT=us
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export SSH_ASKPASS=~/.local/bin/ssh-askpass
-export TERMINAL="alacritty"
+export TERMINAL="kitty"
 
 # Enable the use of ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
+# pranked, use bitwarden instead
+# export SSH_AUTH_SOCK=/home/flock/snap/bitwarden/current/.bitwarden-ssh-agent.sock
 # Start wm if on matching VT
 [ "$(tty)" = "/dev/tty1" ] && exec Hyprland
 

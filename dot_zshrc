@@ -1,5 +1,9 @@
 #STARSHIP
 eval "$(starship init zsh)"
+export $EDITOR=hx
+
+#bitwarden ssh
+# export SSH_AUTH_SOCK=/home/flock/snap/bitwarden/current/.bitwarden-ssh-agent.sock
 
 #alias in="paru -S"
 alias in="sudo dnf5 install"
@@ -86,3 +90,7 @@ export PATH="$PATH:/home/flock/.local/bin"
 [ -f "/home/flock/.ghcup/env" ] && source "/home/flock/.ghcup/env" # ghcup-env
 
 if [ -e /home/flock/.nix-profile/etc/profile.d/nix.sh ]; then . /home/flock/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# # OpenClaw Completion
+# source "/home/flock/.openclaw/completions/openclaw.zsh"
+export PATH=$HOME/.local/bin:$PATH
