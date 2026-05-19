@@ -32,13 +32,13 @@ input {
     touchpad {
         // off
         tap
-        // dwt
+        dwt
         // dwtp
         // drag false
         // drag-lock
         natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
+        accel-speed 0.2
+        accel-profile "adaptive"
         // scroll-method "two-finger"
         // disabled-on-external-mouse
     }
@@ -304,11 +304,13 @@ spawn-at-startup "qs" "-c" "noctalia-shell"
 // spawn-at-startup "zen-browser"
 // spawn-at-startup "/home/flock/Applications/helium-0.11.7.1-x86_64_e30d874ea7f3a4e5f1641083da14e415.AppImage"
 // spawn-at-startup "WINEPREFIX=/home/flock/.musicbee wine 'C:\\users\\flock\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MusicBee\\MusicBee.lnk'"
-spawn-at-startup "discord"
-spawn-sh-at-startup "gtk-launch steam"
+spawn-at-startup "flatpak run org.equicord.equibop"
+spawn-at-startup "flatpak run md.obsidian.Obsidian"
+spawn-at-startup "nextcloud"
+// spawn-sh-at-startup "gtk-launch steam"
 spawn-at-startup "flatpak run --branch=stable --arch=x86_64 --command=thunderbird --file-forwarding net.Thunderbird.Thunderbird @@u %u @@"
 spawn-at-startup "1password"
-// spawn-at-startup "feishin"
+spawn-at-startupe "flatpak run org.jeffvli.feishin"
 
 spawn-at-startup "flatpak run com.vixalien.sticky"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -459,6 +461,7 @@ binds {
 
     Mod+Y hotkey-overlay-title="Open Yazi" { spawn "kitty" "--title" "File Manager" "yazi"; }
     Mod+E hotkey-overlay-title="Open Editor" { spawn "zed"; }
+    Mod+B hotkey-overlay-title="Open Browser" { spawn "helium"; }
     Ctrl+Shift+Escape hotkey-overlay-title="Open Task Manager (Btop)" { spawn "kitty" "--title" "Task Manager" "btop"; } 
 
     Alt+Ctrl+I hotkey-overlay-title="Start Replay Buffer" { spawn-sh "qs -c noctalia-shell ipc call plugin:screen-recorder startReplay"; }
