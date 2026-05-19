@@ -152,6 +152,9 @@
                         "videoPath": ""
                     },
                     "id": "plugin:screen-toolkit"
+                },
+                {
+                    "id": "plugin:weekly-calendar"
                 }
             ],
             "left": [
@@ -315,7 +318,7 @@
         ]
     },
     "colorSchemes": {
-        "darkMode": false,
+        "darkMode": true,
         "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
@@ -475,6 +478,11 @@
                         "x": 1639,
                         "y": 524
                     }
+                ]
+            },
+            {
+                "name": "eDP-1",
+                "widgets": [
                 ]
             }
         ],

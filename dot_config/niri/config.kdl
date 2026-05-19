@@ -310,7 +310,7 @@ spawn-at-startup "nextcloud"
 // spawn-sh-at-startup "gtk-launch steam"
 spawn-at-startup "flatpak run --branch=stable --arch=x86_64 --command=thunderbird --file-forwarding net.Thunderbird.Thunderbird @@u %u @@"
 spawn-at-startup "1password"
-spawn-at-startupe "flatpak run org.jeffvli.feishin"
+spawn-at-startup "flatpak run org.jeffvli.feishin"
 
 spawn-at-startup "flatpak run com.vixalien.sticky"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -462,6 +462,7 @@ binds {
     Mod+Y hotkey-overlay-title="Open Yazi" { spawn "kitty" "--title" "File Manager" "yazi"; }
     Mod+E hotkey-overlay-title="Open Editor" { spawn "zed"; }
     Mod+B hotkey-overlay-title="Open Browser" { spawn "helium"; }
+    Mod+C hotkey-overlay-title="Open Calendar (Khal)" { spawn "kitty" "--title" "Calendar" "khal" "interactive"; }
     Ctrl+Shift+Escape hotkey-overlay-title="Open Task Manager (Btop)" { spawn "kitty" "--title" "Task Manager" "btop"; } 
 
     Alt+Ctrl+I hotkey-overlay-title="Start Replay Buffer" { spawn-sh "qs -c noctalia-shell ipc call plugin:screen-recorder startReplay"; }
@@ -664,7 +665,7 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    Mod+C { center-column; }
+    Mod+Shift+C { center-column; }
 
     // Center all fully visible columns on screen.
     // Mod+Ctrl+C { center-visible-columns; }
