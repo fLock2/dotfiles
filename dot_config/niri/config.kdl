@@ -301,16 +301,12 @@ spawn-at-startup "kwalletd6"
 spawn-at-startup "gnome-keyring"
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
-// spawn-at-startup "zen-browser"
-// spawn-at-startup "/home/flock/Applications/helium-0.11.7.1-x86_64_e30d874ea7f3a4e5f1641083da14e415.AppImage"
-// spawn-at-startup "WINEPREFIX=/home/flock/.musicbee wine 'C:\\users\\flock\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MusicBee\\MusicBee.lnk'"
 spawn-at-startup "discord"
 spawn-sh-at-startup "gtk-launch steam"
 spawn-at-startup "flatpak run --branch=stable --arch=x86_64 --command=thunderbird --file-forwarding org.mozilla.Thunderbird @@u %u @@"
 spawn-at-startup "1password"
 // spawn-at-startup "feishin"
 
-spawn-at-startup "nsticky"
 spawn-at-startup "flatpak run com.vixalien.sticky"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -456,11 +452,12 @@ binds {
     Mod+Shift+T hotkey-overlay-title="Toggle Quake-Style Terminal" { spawn "kitten" "quick-access-terminal"; }
     Mod+S hotkey-overlay-title="Open Noctalia Control Center" { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+Shift+Tab hotkey-overlay-title="Open Window List" { spawn-sh "qs -c noctalia-shell ipc call launcher windows"; }
-    Mod+Shift+Ctrl+S hotkey-overlay-title="Make Window Sticky" { spawn "nsticky" "sticky" "toggle-active"; }
     Mod+Alt+N hotkey-overlay-title="New Sticky Note" { spawn-sh "flatpak run com.vixalien.sticky -n"; }
 
     Mod+Y hotkey-overlay-title="Open Yazi" { spawn "kitty" "--title" "File Manager" "yazi"; }
     Mod+E hotkey-overlay-title="Open Editor" { spawn "/home/flock/.local/zed.app/bin/zed"; }
+    Mod+B hotkey-overlay-title="Open Browser" { spawn "helium"; }
+    Mod+C hotkey-overlay-title="Open Calendar (Khal)" { spawn "kitty" "--title" "Calendar" "khal" "interactive"; }
     Ctrl+Shift+Escape hotkey-overlay-title="Open Task Manager (Btop)" { spawn "kitty" "--title" "Task Manager" "btop"; } 
 
     Alt+Ctrl+I hotkey-overlay-title="Start Replay Buffer" { spawn-sh "qs -c noctalia-shell ipc call plugin:screen-recorder startReplay"; }
@@ -663,7 +660,7 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    Mod+C { center-column; }
+    Mod+Shift+C { center-column; }
 
     // Center all fully visible columns on screen.
     // Mod+Ctrl+C { center-visible-columns; }
