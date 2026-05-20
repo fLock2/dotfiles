@@ -27,5 +27,5 @@ EOF
 
 sudo systemctl daemon-reload
 
-systemctl --user enable vdirsyncer.timer
-systemctl --user start vdirsyncer.timer
+#systemctl --user enable vdirsyncer.timer
+#systemctl --user start vdirsyncer.timer
