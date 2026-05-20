@@ -37,17 +37,11 @@ if status is-interactive
     alias ls="eza"
     alias ll="eza -la"
     #alias lock="betterlockscreen -l"
-    alias swlock="swaylock -i ~/Pictures/kinounderthestars.jpg --clock --effect-blur 3x5 --indicator-idle-visible --indicator-caps-lock --effect-vignette 0.5:0.5 --font 'Helvetica Neue' --bs-hl-color eb6f92ff --key-hl-color f6c177ff --inside-color 23213662 --inside-clear-color ea9a97ff --inside-ver-color 39355232 --inside-wrong-color eb6f9262 --text-color e0def4ff --text-clear-color e0def4ff --text-ver-color e0def4ff --text-wrong-color e0def4ff --ring-color c4a7e7ff --ring-clear-color ea9a97ff --ring-ver-color 3e8fb0ff --ring-wrong-color eb6f92ff"
     alias doom="~/.config/emacs/bin/doom"
     alias extract="unp"
     alias alcs="alacritty-colorscheme"
     #alias colortest="~/scripts/colortest.sh"
     #alias gputop="sudo intel_gpu_top"
-
-    # alias cp="/usr/local/bin/cpg"
-    alias cpv="/usr/local/bin/cpg -Rg"
-    # alias mv="/usr/local/bin/mvg"
-    alias mvv="/usr/local/bin/mvg -g"
 
 end
 function bind_bang

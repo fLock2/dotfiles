@@ -1,7 +1,11 @@
 [calendars]
 
 [[business]]
-path = /home/{{ .chezmoi.username }}/.local/share/khal/calendars/business
+path = /home/flock/.local/share/khal/calendars/{{ onepasswordRead "op://r55xvdkisr4zxwfluus5d2dela/6sovjgyqinacc2mgk7yjausiuq/business" }}
+type = calendar
+
+[[personal]]
+path = /home/flock/.local/share/khal/calendars/{{ onepasswordRead "op://r55xvdkisr4zxwfluus5d2dela/6sovjgyqinacc2mgk7yjausiuq/personal" }}
 type = calendar
 
 [locale]
