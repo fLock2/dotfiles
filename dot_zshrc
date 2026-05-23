@@ -29,6 +29,8 @@ alias python="python3"
 alias ide_swift="zellij --layout ~/.config/zellij/layouts/swift.kdl"
 alias unquarantine="xattr -d com.apple.quarantine"
 alias fix_gestures="sudo killall hidd"
+alias stop-globalprotect="launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*"
+alias start-globalprotect="launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*"
 
 # Aliases for archives
 alias mktar='tar -cvf'

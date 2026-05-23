@@ -34,8 +34,8 @@ PaperWM:bindHotkeys({
      -- switch to a new focused window in tiled grid
       -- focus_left  = {{"cmd", "shift"}, "h"},
       -- focus_right = {{"cmd", "shift"}, "l"},
-      focus_up    = {{"cmd", "shift"}, "k"},
-      focus_down  = {{"cmd", "shift"}, "j"},
+      -- focus_up    = {{"cmd", "shift"}, "k"},
+      -- focus_down  = {{"cmd", "shift"}, "j"},
 
       -- switch windows by cycling forward/backward
       -- (forward = down or right, backward = up or left)
