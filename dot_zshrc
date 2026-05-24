@@ -85,7 +85,9 @@ eval "$(zoxide init zsh)"
 #}
 
 # Created by `pipx` on 2021-11-18 15:50:03
-export PATH="$PATH:/home/flock/.local/bin"
+# export PATH="$PATH:/home/flock/.local/bin"
+path+=('/home/flock/.local/bin')
+export PATH
 
 [ -f "/home/flock/.ghcup/env" ] && source "/home/flock/.ghcup/env" # ghcup-env
 

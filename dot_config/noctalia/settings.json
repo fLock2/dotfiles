@@ -584,7 +584,7 @@
     "hooks": {
         "colorGeneration": "",
         "darkModeChange": "",
-        "enabled": false,
+        "enabled": true,
         "performanceModeDisabled": "",
         "performanceModeEnabled": "",
         "screenLock": "",
@@ -798,9 +798,9 @@
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Helvetica Neue",
+        "fontDefault": "Maple Mono",
         "fontDefaultScale": 1,
-        "fontFixed": "FragmentMono Nerd Font",
+        "fontFixed": "Maple Mono NF CN",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
