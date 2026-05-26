@@ -4,6 +4,8 @@ if status is-interactive
     zoxide init fish | source
     op completion fish | source
 
+    fish_add_path ~/.local/bin
+
     export EDITOR=hx
 
     # Aliases

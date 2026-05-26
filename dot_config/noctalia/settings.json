@@ -323,7 +323,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Catppuccin",
+        "predefinedScheme": "Rose Pine",
         "schedulingMode": "location",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -425,10 +425,10 @@
                     {
                         "id": "Weather",
                         "roundedCorners": true,
-                        "scale": 1.1863642175073144,
+                        "scale": 1.0958398181241615,
                         "showBackground": true,
-                        "x": 1298,
-                        "y": 266
+                        "x": 1303,
+                        "y": 272
                     },
                     {
                         "diskPath": "/",
@@ -439,7 +439,7 @@
                         "showBackground": true,
                         "statType": "CPU",
                         "x": 1297,
-                        "y": 77
+                        "y": 81
                     },
                     {
                         "defaultSettings": {
@@ -792,13 +792,41 @@
             {
                 "enabled": true,
                 "id": "zenBrowser"
+            },
+            {
+                "enabled": true,
+                "id": "yazi"
+            },
+            {
+                "enabled": true,
+                "id": "niri"
+            },
+            {
+                "enabled": true,
+                "id": "kitty"
+            },
+            {
+                "enabled": true,
+                "id": "starship"
+            },
+            {
+                "enabled": true,
+                "id": "zed"
+            },
+            {
+                "enabled": true,
+                "id": "helix"
+            },
+            {
+                "enabled": true,
+                "id": "btop"
             }
         ],
         "enableUserTheming": false
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Maple Mono",
+        "fontDefault": "Maple Mono NF CN",
         "fontDefaultScale": 1,
         "fontFixed": "Maple Mono NF CN",
         "fontFixedScale": 1,
