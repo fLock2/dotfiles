@@ -19,6 +19,22 @@ prepend_keymap = [
   # Custom size_and_mtime linemode
   # { on = [ "u", "S" ], run = [ "linemode size_and_mtime", "plugin pref-by-location -- save" ], desc = "Show Size and Modified time" },
 
+  # lazygit plugin
+  { on   = [ "g", "i" ], run  = "plugin lazygit", desc = "run lazygit" },
+   
+  # chezmoi plugin
+  { on   = ["g", "C", "a" ], run  = "plugin chezmoi add", desc = "Chezmoi add" },
+  { on   = ["g", "C", "A" ], run  = "plugin chezmoi add-encrypt", desc = "Chezmoi add (encrypted)" },
+  { on   = ["g", "C", "r" ], run  = "plugin chezmoi re-add", desc = "Chezmoi re-add" },
+  { on   = ["g", "C", "e" ], run  = "plugin chezmoi edit", desc = "Chezmoi edit source" },
+  { on   = ["g", "C", "d" ], run  = "plugin chezmoi diff", desc = "Chezmoi diff" },
+  { on   = ["g", "C", "p" ], run  = "plugin chezmoi apply", desc = "Chezmoi apply" },
+  { on   = ["g", "C", "s" ], run  = "plugin chezmoi status", desc = "Chezmoi status" },
+  { on   = ["g", "C", "m" ], run  = "plugin chezmoi managed", desc = "Chezmoi managed (fzf)" },
+  { on   = ["g", "C", "u" ], run  = "plugin chezmoi unmanaged", desc = "Chezmoi unmanaged (fzf)" },
+  { on   = ["g", "C", "f" ], run  = "plugin chezmoi forget", desc = "Chezmoi forget" },
+  { on   = ["g", "C", "g" ], run  = "plugin chezmoi goto", desc = "Chezmoi goto source/target" },
+
   # Sorting
   # Any changes during disabled state won't be saved to save file.
   { on = [ ",", "t" ], run = "plugin pref-by-location -- toggle",                                                desc = "Toggle auto-save preferences" },
