@@ -19,9 +19,18 @@ prepend_keymap = [
   # Custom size_and_mtime linemode
   # { on = [ "u", "S" ], run = [ "linemode size_and_mtime", "plugin pref-by-location -- save" ], desc = "Show Size and Modified time" },
 
+  # smart filter plugin
+  { on   = "F", run  = "plugin smart-filter", desc = "Smart Filter"},
+   
+  # smart enter plugin
+  { on   = "l", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file"},
+
   # lazygit plugin
   { on   = [ "g", "i" ], run  = "plugin lazygit", desc = "run lazygit" },
-   
+
+  # diff plugin
+  { on   = "<C-d>", run  = "plugin diff", desc = "Diff the selected with the hovered file" }   
+
   # chezmoi plugin
   { on   = ["g", "C", "a" ], run  = "plugin chezmoi add", desc = "Chezmoi add" },
   { on   = ["g", "C", "A" ], run  = "plugin chezmoi add-encrypt", desc = "Chezmoi add (encrypted)" },
