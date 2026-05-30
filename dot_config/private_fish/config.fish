@@ -2,7 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
     starship init fish | source
     zoxide init fish | source
-
+    /home/flock/.local/share/fnm/fnm env --shell fish | source
     export EDITOR=hx
 
     # Aliases
@@ -47,6 +47,25 @@ if status is-interactive
     alias cpv="/usr/local/bin/cpg -Rg"
     # alias mv="/usr/local/bin/mvg"
     alias mvv="/usr/local/bin/mvg -g"
+
+    #FNM aliases
+    set -gx PATH /run/user/1000/fnm_multishells/72588_1780106541772/bin $PATH
+
+    set -gx FNM_MULTISHELL_PATH /run/user/1000/fnm_multishells/72588_1780106541772
+
+    set -gx FNM_VERSION_FILE_STRATEGY local
+
+    set -gx FNM_DIR "/home/flock/.local/share/fnm"
+
+    set -gx FNM_LOGLEVEL info
+
+    set -gx FNM_NODE_DIST_MIRROR "https://nodejs.org/dist"
+
+    set -gx FNM_COREPACK_ENABLED false
+
+    set -gx FNM_RESOLVE_ENGINES true
+
+    set -gx FNM_ARCH arm64
 
 end
 function bind_bang

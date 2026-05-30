@@ -1,0 +1,67 @@
+[1mdiff --git a/.config/btop/btop.conf b/.config/btop/btop.conf
+index 1184b61cf96c05d160ab70c7a2258a3b82efcb63..3db8bfb783205b5c0fbecd8a0574288292c8eda6 100644
+--- a/.config/btop/btop.conf
++++ b/.config/btop/btop.conf[m
+[36m@@ -40,6 +40,9 @@[m
+ # Graph symbol to use for graphs in cpu box, "default", "braille", "block" or "tty".
+ graph_symbol_cpu = "default"
+ 
+[32m+# Graph symbol to use for graphs in gpu box, "default", "braille", "block" or "tty".[m
+[32m+graph_symbol_gpu = "default"[m
+[32m+[m
+ # Graph symbol to use for graphs in cpu box, "default", "braille", "block" or "tty".
+ graph_symbol_mem = "default"
+ 
+[36m@@ -50,7 +53,7 @@[m # Graph symbol to use for graphs in cpu box, "default", "braille", "block" or "tty".
+ graph_symbol_proc = "default"
+ 
+ #* Manually set which boxes to show. Available values are "cpu mem net proc" and "gpu0" through "gpu5", separate values with whitespace.
+[31m-shown_boxes = "mem net proc cpu"[m
+[32m+shown_boxes = "cpu mem net proc"[m
+ 
+ #* Update time in milliseconds, recommended 2000 ms or above for better sample times for graphs.
+ update_ms = 2000
+[36m@@ -103,6 +106,9 @@[m #* Sets the CPU stat shown in lower half of the CPU graph, "total" is always available.
+ #* Select from a list of detected attributes from the options menu.
+ cpu_graph_lower = "total"
+ 
+[32m+#* If gpu info should be shown in the cpu box. Available values = "Auto", "On" and "Off".[m
+[32m+show_gpu_info = "Auto"[m
+[32m+[m
+ #* Toggles if the lower CPU graph should be inverted.
+ cpu_invert_lower = true
+ 
+[36m@@ -234,3 +240,33 @@[m log_level = "WARNING"
+ 
+ #* Automatically save current settings to config file on exit.
+ save_config_on_exit = true
+[32m+[m
+[32m+#* Measure PCIe throughput on NVIDIA cards, may impact performance on certain cards.[m
+[32m+nvml_measure_pcie_speeds = true[m
+[32m+[m
+[32m+#* Measure PCIe throughput on AMD cards, may impact performance on certain cards.[m
+[32m+rsmi_measure_pcie_speeds = true[m
+[32m+[m
+[32m+#* Horizontally mirror the GPU graph.[m
+[32m+gpu_mirror_graph = true[m
+[32m+[m
+[32m+#* Set which GPU vendors to show. Available values are "nvidia amd intel"[m
+[32m+shown_gpus = "nvidia amd intel"[m
+[32m+[m
+[32m+#* Custom gpu0 model name, empty string to disable.[m
+[32m+custom_gpu_name0 = ""[m
+[32m+[m
+[32m+#* Custom gpu1 model name, empty string to disable.[m
+[32m+custom_gpu_name1 = ""[m
+[32m+[m
+[32m+#* Custom gpu2 model name, empty string to disable.[m
+[32m+custom_gpu_name2 = ""[m
+[32m+[m
+[32m+#* Custom gpu3 model name, empty string to disable.[m
+[32m+custom_gpu_name3 = ""[m
+[32m+[m
+[32m+#* Custom gpu4 model name, empty string to disable.[m
+[32m+custom_gpu_name4 = ""[m
+[32m+[m
+[32m+#* Custom gpu5 model name, empty string to disable.[m
+[32m+custom_gpu_name5 = ""[m

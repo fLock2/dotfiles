@@ -725,3 +725,6 @@ binds {
     Ctrl+Alt+Delete { quit; }
 
 }
+
+include "./noctalia.kdl"
+
