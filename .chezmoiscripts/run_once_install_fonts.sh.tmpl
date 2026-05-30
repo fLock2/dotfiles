@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# chezmoi template: install_fonts.sh.tmpl
+# Target path: /home/{{ .chezmoi.username }}/.local/share/fonts
+# Version: 4
+
+set -euo pipefail
+
+# Create a secure temporary directory that automatically deletes on exit
+TMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+FONT_DIR="/home/{{ .chezmoi.username }}/.local/share/fonts"
+mkdir -p "$FONT_DIR"
+
+# Fetch latest release JSON once
+RELEASE_JSON=$(curl -s https://api.github.com/repos/subframe7536/maple-font/releases/latest)
+
+# Helper function to extract URL using grep and sed
+# 1. Grep the line containing the filename
+# 2. Use sed to extract the URL between double quotes
+get_url() {
+    echo "$RELEASE_JSON" | grep "$1" | sed -n 's/.*"browser_download_url": "\([^"]*\)".*/\1/p' | head -n 1
+}
+
+# Install Maple Mono (Both versions into the same directory)
+MAPLE_DIR="$FONT_DIR/MapleMono"
+mkdir -p "$MAPLE_DIR"
+
+# Download and extract Ligature version
+# We grep for "NF-CN.zip" and exclude "NL" (No Ligature)
+MAPLE_NF_CN_URL=$(echo "$RELEASE_JSON" | grep "NF-CN.zip" | grep -v "NL" | sed -n 's/.*"browser_download_url": "\([^"]*\)".*/\1/p' | head -n 1)
+curl -L "$MAPLE_NF_CN_URL" -o "$TMP_DIR/maple_nf-cn.zip"
+unzip -o "$TMP_DIR/maple_nf-cn.zip" -d "$MAPLE_DIR"
+
+# Download and extract Base version
+MAPLE_BASE_URL=$(get_url "MapleMono-Variable.zip")
+curl -L "$MAPLE_BASE_URL" -o "$TMP_DIR/maple_base.zip"
+unzip -o "$TMP_DIR/maple_base.zip" -d "$MAPLE_DIR"
+
+# Install Helvetica Neue
+HELVETICA_DIR="$FONT_DIR/HelveticaNeue"
+mkdir -p "$HELVETICA_DIR"
+git clone --depth 1 https://github.com/ifvictr/helvetica-neue "$TMP_DIR/helvetica-repo"
+find "$TMP_DIR/helvetica-repo" -name "*.otf" -exec cp {} "$HELVETICA_DIR" \;
+
+# Update font cache
+fc-cache -fv

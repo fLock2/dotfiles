@@ -1,0 +1,61 @@
+#!/bin/bash
+
+{{- if eq .chezmoi.os "linux" }}
+
+set -euo pipefail
+
+INSTALL_DIR="${HOME}/.local/share/icons"
+REPO="rose-pine/cursor"
+API_URL="https://api.github.com/repos/${REPO}/releases/latest"
+
+echo "Fetching latest release for ${REPO}..."
+RELEASE_JSON=$(curl -sf "${API_URL}")
+
+if [ -z "${RELEASE_JSON}" ]; then
+    echo "ERROR: Failed to fetch release info from GitHub API" >&2
+    exit 1
+fi
+
+TAG=$(echo "${RELEASE_JSON}" | grep '"tag_name"' | head -1 | sed -E 's/.*"tag_name":\s*"([^"]+)".*/\1/')
+echo "Latest version: ${TAG}"
+
+# Extract browser_download_url for all Linux assets
+LINUX_URLS=$(echo "${RELEASE_JSON}" \
+    | grep '"browser_download_url"' \
+    | grep -i 'linux' \
+    | sed -E 's/.*"browser_download_url":\s*"([^"]+)".*/\1/')
+
+if [ -z "${LINUX_URLS}" ]; then
+    echo "ERROR: No Linux assets found in release ${TAG}" >&2
+    exit 1
+fi
+
+mkdir -p "${INSTALL_DIR}"
+
+TMPDIR=$(mktemp -d)
+trap 'rm -rf "${TMPDIR}"' EXIT
+
+for URL in ${LINUX_URLS}; do
+    FILENAME=$(basename "${URL}")
+    echo "Downloading ${FILENAME}..."
+    curl -sfL -o "${TMPDIR}/${FILENAME}" "${URL}"
+
+    echo "Extracting ${FILENAME}..."
+    tar -xf "${TMPDIR}/${FILENAME}" -C "${TMPDIR}"
+done
+
+# Move extracted cursor theme directories into ~/.local/share/icons
+for THEME_DIR in "${TMPDIR}"/*/; do
+    if [ -d "${THEME_DIR}" ]; then
+        THEME_NAME=$(basename "${THEME_DIR}")
+        echo "Installing cursor theme: ${THEME_NAME}"
+        rm -rf "${INSTALL_DIR}/${THEME_NAME}"
+        cp -r "${THEME_DIR}" "${INSTALL_DIR}/${THEME_NAME}"
+    fi
+done
+
+echo "Rosé Pine cursors ${TAG} installed to ${INSTALL_DIR}"
+echo "You may need to log out/in or restart apps for the cursor theme to take effect."
+
+{{- end }}
+
