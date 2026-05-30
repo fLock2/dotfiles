@@ -18,6 +18,7 @@
         "ignoreMouseInput": false,
         "overviewLayer": false,
         "pinnedApps": [
+            "appimagekit_4566b2597ae756935ccc767537bd273e-Feishin"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -795,10 +796,6 @@
             },
             {
                 "enabled": true,
-                "id": "yazi"
-            },
-            {
-                "enabled": true,
                 "id": "niri"
             },
             {
@@ -820,13 +817,21 @@
             {
                 "enabled": true,
                 "id": "btop"
+            },
+            {
+                "enabled": true,
+                "id": "yazi"
+            },
+            {
+                "enabled": true,
+                "id": "discord"
             }
         ],
         "enableUserTheming": false
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Maple Mono NF CN",
+        "fontDefault": "Helvetica Neue",
         "fontDefaultScale": 1,
         "fontFixed": "Maple Mono NF CN",
         "fontFixedScale": 1,
